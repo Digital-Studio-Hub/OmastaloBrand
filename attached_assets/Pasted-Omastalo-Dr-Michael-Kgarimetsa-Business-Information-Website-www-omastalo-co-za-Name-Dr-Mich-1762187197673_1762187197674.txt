@@ -1,0 +1,115 @@
+Omastalo (Dr Michael Kgarimetsa)
+Business Information
+Website: www.omastalo.co.za
+
+Name: Dr Michael Kgarimetsa
+
+Organization: Organization for Mathematics, Statistics and Life Orientation (OMASTALO)
+
+Focus: Academic, Professional, Inspirational Personal Brand
+
+Future Service Goal: Add section for Marriage Officiate Services
+
+Purpose: Showcase Dr Kgarimetsa’s academic background, promote educational events, provide mentoring and guidance, and highlight personal services.
+
+Objective
+Create a modern, mobile-first personal brand website for an academic professional — elegant, credible, and inspiring.
+The site must reflect academic excellence, leadership, and personal integrity.
+It must also be prepared to expand with future services (e.g., marriage officiating, workshops, and community initiatives).
+
+Website Structure
+Home Page
+
+Hero section with Dr Michael Kgarimetsa’s professional image, title, and a quote or motto.
+
+CTA buttons: “Book an Event” | “Learn More” | “Get in Touch”
+
+Short introduction paragraph highlighting Omastalo’s purpose and Dr Kgarimetsa’s academic journey.
+
+Visual banners using optimized .webp stock images of education, classrooms, and professional gatherings.
+
+About Page
+
+Biography section with academic background and achievements.
+
+Timeline of career milestones or awards.
+
+Portrait photo (optimized, .webp format).
+
+Mission statement: advancing education in mathematics, statistics, and life orientation.
+
+Services / Expertise
+
+Mathematics Education
+
+Statistics Coaching
+
+Life Orientation Mentorship
+
+Leadership Development Workshops
+
+Future placeholder: Marriage Officiate Services
+
+Events Page
+
+List upcoming seminars, academic conferences, and workshops.
+
+Event cards with title, date, location, and “Register” or “Learn More” button.
+
+Contact Page
+
+Contact form: Name, Email, Message.
+
+Google Map embed (optional).
+
+Contact info:
+
++27 [Insert Office Number]
+
+info@omastalo.co.za
+
+South Africa
+
+Design & Aesthetic
+Color Palette: Deep navy (#0D1B2A), Gold accent (#C9A227), White background (#FFFFFF).
+
+Typography: “Poppins” or “Inter” (professional, clean).
+
+Layout: Spacious, grid-based, responsive for all screens.
+
+Mood: Academic, trustworthy, elegant.
+
+Imagery: Use web-optimized .webp stock images relevant to education, mentorship, and community development.
+
+Performance: Lazy-load all images and maintain page load under 1.5 seconds.
+
+Footer Example
+OMASTALO
+Organization for Mathematics, Statistics and Life Orientation
+Empowering minds through education, mentorship, and leadership.
+
+Quick Links
+Home | About | Services | Events | Contact
+
+Contact
++27 [Insert number]
+info@omastalo.co.za
+South Africa
+
+Verified by Lekker Network
+Powered by Lekker Network
+
+© 2025 OMASTALO | All Rights Reserved | Privacy Policy | Terms of Service
+
+** Technical Requirements**
+Fully responsive (Mobile-first design).
+
+SEO-ready with meta-tags and schema.
+
+Image compression and caching for speed.
+
+Optimized accessibility (WCAG 2.1).
+
+Contact form must include reCAPTCHA.
+
+All assets served as .webp for performance.

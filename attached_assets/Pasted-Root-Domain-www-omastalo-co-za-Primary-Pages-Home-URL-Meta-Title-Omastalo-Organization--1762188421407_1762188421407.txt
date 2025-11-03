@@ -1,0 +1,178 @@
+Root Domain
+www.omastalo.co.za
+
+Primary Pages
+Home
+URL: /
+Meta Title: Omastalo | Organization for Mathematics, Statistics & Life Orientation
+Meta Description: Welcome to Omastalo — led by Dr. Michael Kgarimetsa, empowering minds through Mathematics, Statistics, and Life Orientation. Explore mentorship, academic services, and personal development programs.
+Keywords: Omastalo, Mathematics education, Statistics consulting, Life Orientation training, Dr. Michael Kgarimetsa, academic mentorship, South Africa education
+
+About
+URL: /about
+Meta Title: About Dr. Michael Kgarimetsa | Omastalo Founder & Academic Leader
+Meta Description: Learn more about Dr. Michael Kgarimetsa, founder of Omastalo — an academic organization dedicated to Mathematics, Statistics, and Life Orientation excellence.
+Keywords: Dr. Michael Kgarimetsa biography, academic leader South Africa, mathematics educator, statistics expert, life orientation mentor
+
+Services
+URL: /services
+Meta Title: Academic Services | Mentorship, Education, & Consulting by Omastalo
+Meta Description: Discover Omastalo’s educational and consulting services — from academic mentorship to statistical consulting and personal growth programs.
+Keywords: academic consulting, mentorship South Africa, education training, statistics and data analysis, life orientation workshops, teaching and learning support
+
+Subpages:
+/services/educational-consultation
+Meta Title: Educational Consultation Services | Omastalo
+Description: Professional academic support and personal mentorship for students, teachers, and institutions.
+
+/services/public-speaking
+Meta Title: Motivational Speaking & Academic Seminars | Omastalo
+Description: Book Dr. Michael Kgarimetsa for academic and motivational talks on education, leadership, and personal success.
+
+/services/marriage-officiation (Future Page)
+Meta Title: Marriage Officiation Services | Omastalo
+Description: Coming soon — certified marriage officiation by Dr. Kgarimetsa, promoting love, unity, and purpose.
+
+Events
+URL: /events
+Meta Title: Academic Events & Workshops | Omastalo
+Meta Description: Stay updated on Omastalo’s upcoming academic events, lectures, and public speaking engagements. RSVP and join our community of learners.
+Keywords: academic events, education workshops, public lectures South Africa, mentorship seminars, Omastalo events
+
+Subpages:
+
+/events/upcoming
+
+/events/past
+
+Blog / Insights
+URL: /blog
+Meta Title: Insights & Research | Omastalo Blog
+Meta Description: Read the latest articles and insights from Dr. Kgarimetsa on Mathematics, Statistics, Life Orientation, and academic excellence.
+Keywords: educational blog, mathematics insights, statistics research, academic thought leadership, life orientation resources
+
+Subcategories:
+
+/blog/mathematics
+
+/blog/statistics
+
+/blog/life-orientation
+
+Resources
+URL: /resources
+Meta Title: Academic Resources & Downloads | Omastalo
+Meta Description: Access free academic materials, guides, and research papers in Mathematics, Statistics, and Life Orientation.
+Keywords: educational resources, downloadable study guides, research papers, academic materials, Omastalo resources
+
+Contact
+URL: /contact
+Meta Title: Contact Omastalo | Connect with Dr. Michael Kgarimetsa
+Meta Description: Get in touch with Omastalo for events, academic services, or collaboration inquiries. Send a message via our secure ZeptoMail contact form.
+Keywords: contact Omastalo, academic consulting South Africa, book Dr. Kgarimetsa, Omastalo email, WhatsApp Omastalo
+
+Supporting Pages
+Page
+
+URL
+
+Meta Title
+
+Meta Description
+
+Testimonials
+
+/testimonials
+
+Testimonials
+
+What students and professionals say about Omastalo’s mentorship and academic impact.
+
+Gallery
+
+/gallery
+
+Gallery
+
+Explore highlights from Omastalo’s lectures, workshops, and events.
+
+FAQ
+
+/faq
+
+FAQ
+
+Frequently asked questions about Omastalo’s academic and mentorship services.
+
+Terms of Service
+
+/terms
+
+Terms of Service
+
+Legal terms and usage policies for Omastalo’s website and services.
+
+Privacy Policy
+
+/privacy
+
+Privacy Policy
+
+Information on how Omastalo protects your data and communication.
+
+Sitemap Hierarchy (SEO-Friendly)
+/
+├── about/
+├── services/
+│   ├── educational-consultation/
+│   ├── mentorship/
+│   ├── public-speaking/
+│   └── marriage-officiation/
+├── events/
+│   ├── upcoming/
+│   └── past/
+├── blog/
+│   ├── mathematics/
+│   ├── statistics/
+│   └── life-orientation/
+├── resources/
+│   ├── downloads/
+│   ├── publications/
+│   └── research/
+├── testimonials/
+├── gallery/
+├── faq/
+├── contact/
+├── terms/
+└── privacy/
+
+Technical & Optimization Notes
+Use .webp images for all visuals (optimized, under 200kb).
+
+Enable lazy loading for gallery, blog, and event images.
+
+Use structured data (Schema.org) for:
+
+Person (Dr. Michael Kgarimetsa)
+
+Organization (Omastalo)
+
+Event (for lectures/workshops)
+
+Add Open Graph tags for shareable previews.
+
+Generate XML Sitemap and robots.txt automatically during deployment.
+
+Email Integration
+All form submissions via /api/send-mail using ZeptoMail API.
+
+Send both admin notifications and user confirmations.
+
+Footer Standard
+“Powered by Lekker Network” with clickable logo → https://lekker.network/.
+
+“Verified Badge” linking to → https://lekker.network/the-lekker-network-verified.
+
+© 2025 Omastalo — Organization for Mathematics, Statistics & Life Orientation.
+
+Terms of Service | Privacy Policy links at bottom.
