@@ -1,0 +1,308 @@
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { SEO } from "@/components/SEO";
+import {
+  GraduationCap,
+  BarChart3,
+  Heart,
+  Users,
+  Calendar,
+  ArrowRight,
+  BookOpen,
+  TrendingUp,
+} from "lucide-react";
+import professorImage from "@assets/stock_images/professional_african_6667cdef.jpg";
+import conferenceImage from "@assets/stock_images/academic_conference__c73df436.jpg";
+import studentsImage from "@assets/stock_images/university_students__a3823dac.jpg";
+import mentorshipImage from "@assets/stock_images/professional_mentors_d11d97f7.jpg";
+
+export default function Home() {
+  const services = [
+    {
+      icon: GraduationCap,
+      title: "Mathematics Education",
+      description: "Expert guidance in mathematical concepts and problem-solving techniques.",
+    },
+    {
+      icon: BarChart3,
+      title: "Statistics Coaching",
+      description: "Comprehensive statistical analysis and data interpretation training.",
+    },
+    {
+      icon: Heart,
+      title: "Life Orientation",
+      description: "Personal development and leadership mentorship programs.",
+    },
+  ];
+
+  const events = [
+    {
+      title: "Advanced Statistics Workshop",
+      date: "March 15, 2025",
+      category: "Workshop",
+      location: "Online",
+    },
+    {
+      title: "Mathematics Excellence Seminar",
+      date: "April 2, 2025",
+      category: "Seminar",
+      location: "Johannesburg",
+    },
+    {
+      title: "Leadership Development Program",
+      date: "April 20, 2025",
+      category: "Training",
+      location: "Cape Town",
+    },
+  ];
+
+  const blogPosts = [
+    {
+      title: "The Future of Mathematics Education in South Africa",
+      category: "Mathematics",
+      excerpt: "Exploring innovative teaching methodologies and their impact on student success.",
+      image: studentsImage,
+    },
+    {
+      title: "Understanding Statistical Significance",
+      category: "Statistics",
+      excerpt: "A comprehensive guide to interpreting statistical results in research.",
+      image: conferenceImage,
+    },
+  ];
+
+  const stats = [
+    { number: "500+", label: "Students Mentored" },
+    { number: "50+", label: "Events Hosted" },
+    { number: "15+", label: "Years Experience" },
+    { number: "100%", label: "Dedication" },
+  ];
+
+  return (
+    <div className="min-h-screen">
+      <SEO
+        title="Omastalo | Organization for Mathematics, Statistics & Life Orientation"
+        description="Welcome to Omastalo — led by Dr. Michael Kgarimetsa, empowering minds through Mathematics, Statistics, and Life Orientation. Explore mentorship, academic services, and personal development programs."
+        keywords="Omastalo, Mathematics education, Statistics consulting, Life Orientation training, Dr. Michael Kgarimetsa, academic mentorship, South Africa education"
+        url="https://www.omastalo.co.za"
+      />
+      <section className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-background to-muted">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <div className="text-primary font-heading font-semibold text-sm tracking-wide mb-4">
+                OMASTALO
+              </div>
+              <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
+                Dr. Michael Kgarimetsa
+              </h1>
+              <p className="text-xl sm:text-2xl text-muted-foreground font-heading font-medium mb-4">
+                Organization for Mathematics, Statistics & Life Orientation
+              </p>
+              <p className="text-lg text-muted-foreground italic mb-8 max-w-xl leading-relaxed">
+                "Empowering minds through education, inspiring excellence through mentorship, and
+                building leaders through dedication."
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/contact">
+                  <Button size="lg" data-testid="button-book-event" className="w-full sm:w-auto">
+                    Book an Event
+                  </Button>
+                </Link>
+                <Link href="/about">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    data-testid="button-learn-more"
+                    className="w-full sm:w-auto"
+                  >
+                    Learn More
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <img
+                src={professorImage}
+                alt="Dr. Michael Kgarimetsa"
+                className="rounded-lg shadow-2xl w-full h-auto"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-background">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-6">
+            Advancing Education Through Excellence
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            OMASTALO is dedicated to fostering academic excellence and personal growth through
+            comprehensive educational programs in Mathematics, Statistics, and Life Orientation. Led
+            by Dr. Michael Kgarimetsa, we provide world-class mentorship, training, and guidance to
+            students, educators, and professionals across South Africa.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-4">Our Services</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Comprehensive educational solutions tailored to your needs
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card
+                key={index}
+                className="p-8 hover-elevate transition-all duration-300 hover:shadow-lg"
+                data-testid={`card-service-${index}`}
+              >
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                  <service.icon className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="font-heading font-semibold text-xl mb-3">{service.title}</h3>
+                <p className="text-muted-foreground mb-4">{service.description}</p>
+                <Link href="/services">
+                  <a className="inline-flex items-center gap-2 text-primary font-medium hover-elevate active-elevate-2 rounded-md py-1 -ml-1 px-1">
+                    Learn More <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Link>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-2">
+                Upcoming Events
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Join us for upcoming seminars and workshops
+              </p>
+            </div>
+            <Link href="/events">
+              <Button variant="outline" data-testid="button-view-all-events">
+                View All
+              </Button>
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {events.map((event, index) => (
+              <Card
+                key={index}
+                className="p-6 border-l-4 border-l-primary hover-elevate transition-all duration-300 hover:shadow-lg"
+                data-testid={`card-event-${index}`}
+              >
+                <Badge className="mb-3" data-testid={`badge-event-category-${index}`}>
+                  {event.category}
+                </Badge>
+                <h3 className="font-heading font-semibold text-lg mb-3">{event.title}</h3>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-primary" />
+                    <span>{event.date}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-primary" />
+                    <span>{event.location}</span>
+                  </div>
+                </div>
+                <Button className="w-full mt-4" variant="outline" data-testid={`button-register-${index}`}>
+                  Register
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-4">
+              Latest Insights
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Explore our latest articles and research
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {blogPosts.map((post, index) => (
+              <Card
+                key={index}
+                className="overflow-hidden hover-elevate transition-all duration-300 hover:shadow-lg"
+                data-testid={`card-blog-${index}`}
+              >
+                <div className="relative h-48">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <Badge className="absolute top-4 left-4">{post.category}</Badge>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-heading font-semibold text-xl mb-2">{post.title}</h3>
+                  <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
+                  <Link href="/blog">
+                    <a className="inline-flex items-center gap-2 text-primary font-medium hover-elevate active-elevate-2 rounded-md py-1 -ml-1 px-1">
+                      Read More <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center" data-testid={`stat-${index}`}>
+                <div className="font-heading font-bold text-4xl md:text-5xl text-primary mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-muted-foreground font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="py-20 relative bg-cover bg-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.85), rgba(13, 27, 42, 0.85)), url(${mentorshipImage})`,
+        }}
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <h2 className="font-heading font-bold text-3xl sm:text-4xl mb-6">
+            Ready to Transform Your Learning Journey?
+          </h2>
+          <p className="text-xl mb-8 text-gray-200">
+            Get in touch to discuss how we can help you achieve academic excellence
+          </p>
+          <Link href="/contact">
+            <Button size="lg" data-testid="button-get-in-touch">
+              Get in Touch
+            </Button>
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+}
