@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import passport from "passport";
-import { contactFormSchema, insertBlogPostSchema } from "@shared/schema";
+import { contactFormSchema, insertBlogPostSchema, insertEventSchema, insertRsvpSchema } from "@shared/schema";
 import { z } from "zod";
 import { setupAuth, isAuthenticated, isAdmin } from "./auth";
 import { storage } from "./storage";
@@ -158,6 +158,176 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error deleting blog post:", error);
       res.status(500).json({ error: "Failed to delete blog post" });
+    }
+  });
+
+  app.get("/api/events", async (req, res) => {
+    try {
+      const status = req.query.status as string | undefined;
+      const events = await storage.getAllEvents(status);
+      res.json(events);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+      res.status(500).json({ error: "Failed to fetch events" });
+    }
+  });
+
+  app.get("/api/events/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const event = await storage.getEvent(id);
+      if (!event) {
+        return res.status(404).json({ error: "Event not found" });
+      }
+      res.json(event);
+    } catch (error) {
+      console.error("Error fetching event:", error);
+      res.status(500).json({ error: "Failed to fetch event" });
+    }
+  });
+
+  app.get("/api/events/slug/:slug", async (req, res) => {
+    try {
+      const event = await storage.getEventBySlug(req.params.slug);
+      if (!event) {
+        return res.status(404).json({ error: "Event not found" });
+      }
+      res.json(event);
+    } catch (error) {
+      console.error("Error fetching event:", error);
+      res.status(500).json({ error: "Failed to fetch event" });
+    }
+  });
+
+  app.post("/api/events", isAuthenticated, isAdmin, async (req, res) => {
+    try {
+      const data = insertEventSchema.parse(req.body);
+      const event = await storage.createEvent(data);
+      res.json(event);
+    } catch (error) {
+      console.error("Error creating event:", error);
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid event data", details: error.errors });
+      } else {
+        res.status(500).json({ error: "Failed to create event" });
+      }
+    }
+  });
+
+  app.patch("/api/events/:id", isAuthenticated, isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const event = await storage.updateEvent(id, req.body);
+      if (!event) {
+        return res.status(404).json({ error: "Event not found" });
+      }
+      res.json(event);
+    } catch (error) {
+      console.error("Error updating event:", error);
+      res.status(500).json({ error: "Failed to update event" });
+    }
+  });
+
+  app.delete("/api/events/:id", isAuthenticated, isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const success = await storage.deleteEvent(id);
+      if (!success) {
+        return res.status(404).json({ error: "Event not found" });
+      }
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      res.status(500).json({ error: "Failed to delete event" });
+    }
+  });
+
+  app.get("/api/events/:id/rsvps", isAuthenticated, isAdmin, async (req, res) => {
+    try {
+      const eventId = parseInt(req.params.id);
+      const rsvps = await storage.getRsvpsByEvent(eventId);
+      res.json(rsvps);
+    } catch (error) {
+      console.error("Error fetching RSVPs:", error);
+      res.status(500).json({ error: "Failed to fetch RSVPs" });
+    }
+  });
+
+  app.post("/api/rsvps", async (req, res) => {
+    try {
+      const data = insertRsvpSchema.parse(req.body);
+      
+      const event = await storage.getEvent(data.eventId);
+      if (!event) {
+        return res.status(404).json({ error: "Event not found" });
+      }
+      
+      const rsvp = await storage.createRsvp(data);
+      
+      const ZEPTO_API_KEY = process.env.ZEPTOMAIL_API_KEY;
+      const ZEPTO_FROM_EMAIL = process.env.ZEPTOMAIL_FROM_EMAIL;
+      
+      if (ZEPTO_API_KEY && ZEPTO_FROM_EMAIL) {
+        const confirmationEmail = {
+          from: { address: ZEPTO_FROM_EMAIL },
+          to: [{ email_address: { address: data.email } }],
+          subject: `RSVP Confirmation: ${event.title}`,
+          htmlbody: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <div style="background-color: #0D1B2A; color: white; padding: 30px; text-align: center;">
+                <h1 style="margin: 0; font-size: 28px;">OMASTALO</h1>
+                <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">
+                  Organization for Mathematics, Statistics & Life Orientation
+                </p>
+              </div>
+              <div style="padding: 30px; background-color: #fff;">
+                <h2 style="color: #0D1B2A; margin-top: 0;">Hello ${data.name},</h2>
+                <p style="color: #333; line-height: 1.6;">
+                  Thank you for registering for <strong>${event.title}</strong>!
+                </p>
+                <div style="background-color: #f9f9f9; border-left: 4px solid #C9A227; padding: 15px; margin: 20px 0;">
+                  <h3 style="margin-top: 0; color: #0D1B2A; font-size: 16px;">Event Details:</h3>
+                  <p style="margin: 5px 0;"><strong>Date:</strong> ${new Date(event.eventDate).toLocaleDateString('en-ZA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  <p style="margin: 5px 0;"><strong>Time:</strong> ${new Date(event.eventDate).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' })}</p>
+                  <p style="margin: 5px 0;"><strong>Location:</strong> ${event.location}</p>
+                  <p style="margin: 5px 0;"><strong>Attendees:</strong> ${data.attendees} person(s)</p>
+                </div>
+                <p style="color: #333; line-height: 1.6;">
+                  We look forward to seeing you there! If you have any questions, please contact us.
+                </p>
+              </div>
+              <div style="background-color: #f5f5f5; padding: 20px; text-align: center;">
+                <p style="margin: 0; color: #666; font-size: 14px;">
+                  <strong>Contact Information</strong><br>
+                  Email: info@omastalo.co.za<br>
+                  Website: www.omastalo.co.za
+                </p>
+                <p style="margin: 15px 0 0 0; color: #999; font-size: 12px;">
+                  © 2025 OMASTALO. All rights reserved.
+                </p>
+              </div>
+            </div>
+          `,
+        };
+        
+        await fetch("https://api.zeptomail.com/v1.1/email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: ZEPTO_API_KEY,
+          },
+          body: JSON.stringify(confirmationEmail),
+        }).catch(err => console.error("Failed to send RSVP confirmation email:", err));
+      }
+      
+      res.json(rsvp);
+    } catch (error) {
+      console.error("Error creating RSVP:", error);
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid RSVP data", details: error.errors });
+      } else {
+        res.status(500).json({ error: "Failed to create RSVP" });
+      }
     }
   });
 
