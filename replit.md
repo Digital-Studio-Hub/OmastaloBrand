@@ -68,6 +68,18 @@ Preferred communication style: Simple, everyday language.
   - `GET /api/auth/user`: Get current authenticated user
 - **Contact Form:**
   - `POST /api/send-mail`: Contact form submission handler (validates via Zod, sends via ZeptoMail)
+- **Events:**
+  - `GET /api/events`: Fetch all events (public)
+  - `POST /api/events`: Create new event (admin only)
+  - `PATCH /api/events/:id`: Update event (admin only)
+  - `DELETE /api/events/:id`: Delete event (admin only)
+- **RSVPs:**
+  - `POST /api/rsvps`: Submit event registration (public, sends ZeptoMail confirmation)
+- **Blog:**
+  - `GET /api/blog`: Fetch all published blog posts (public)
+  - `POST /api/blog`: Create blog post (admin only)
+  - `PATCH /api/blog/:id`: Update blog post (admin only)
+  - `DELETE /api/blog/:id`: Delete blog post (admin only)
 
 **Middleware:**
 - Express session middleware with connect-pg-simple store (7-day TTL)
@@ -158,6 +170,53 @@ curl -X POST https://your-domain/api/auth/init-admin \
 ```
 
 **Protected Routes**: Future admin pages will use `isAdmin` check from `useAuth()` hook.
+
+### Feature Implementation Details
+
+**Event Registration System (November 2025):**
+- **Events Page (`client/src/pages/Events.tsx`):**
+  - Fetches events from database via GET `/api/events`
+  - Filters events into "Upcoming" and "Past" tabs using date-fns `isFuture()` and `isPast()`
+  - Displays loading spinner during data fetch
+  - Shows error state if API request fails (distinguishes from "no events" state)
+  - Empty states for when no events exist in each category
+  - Each event card displays: title, category badge, description, date/time, location, capacity
+  - "Register Now" button opens RSVP dialog for upcoming events
+  
+- **RSVP Dialog (`client/src/components/RSVPDialog.tsx`):**
+  - React Hook Form with Zod validation for attendee information
+  - Required fields: name, email, number of attendees (1-10)
+  - Optional fields: phone number, special message
+  - Submits to POST `/api/rsvps` endpoint
+  - Success state displays CheckCircle2 icon (no emojis per design guidelines)
+  - Confirmation message informs user of email delivery
+  - Automatically resets form state on dialog close
+  
+- **Backend RSVP Processing (`server/routes.ts`):**
+  - Validates RSVP data using `insertRsvpSchema` from Drizzle Zod
+  - Stores RSVP in database via `storage.createRsvp()`
+  - Retrieves event details to include in confirmation email
+  - Sends branded HTML email via ZeptoMail with:
+    - Event title, date, time, location
+    - Attendee count and special requests
+    - OMASTALO branding with gold (#C9A227) accents
+  - Returns success response to frontend
+  
+- **Data Flow:**
+  1. User clicks "Register Now" on Events page
+  2. RSVPDialog opens with event pre-selected
+  3. User fills form and submits
+  4. Frontend validates via Zod schema
+  5. POST request to `/api/rsvps` with event ID and attendee data
+  6. Backend validates, saves to database, sends confirmation email
+  7. Success state shown with icon and close button
+  8. User receives branded email confirmation
+
+**Blog System (November 2025):**
+- Blog API routes implemented (GET/POST/PATCH/DELETE)
+- Blog page fetches from database with loading/empty states
+- Admin panel UI development paused - rich text editor not yet implemented
+- Status field filters for "published" posts only on public endpoint
 
 ### Performance Optimizations
 
