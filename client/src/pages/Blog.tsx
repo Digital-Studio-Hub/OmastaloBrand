@@ -1,81 +1,31 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
-import { Calendar, User, ArrowRight } from "lucide-react";
+import { Calendar, Loader2, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import type { BlogPost } from "@shared/schema";
+import { format } from "date-fns";
 import studentsImage from "@assets/stock_images/university_students__a3823dac.jpg";
 import conferenceImage from "@assets/stock_images/academic_conference__c73df436.jpg";
 import booksImage from "@assets/stock_images/education_books_math_f4e40b15.jpg";
+
+const defaultImages: Record<string, string> = {
+  mathematics: studentsImage,
+  statistics: conferenceImage,
+  "life-orientation": booksImage,
+};
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const categories = ["all", "mathematics", "statistics", "life-orientation"];
 
-  const posts = [
-    {
-      title: "The Future of Mathematics Education in South Africa",
-      category: "mathematics",
-      image: studentsImage,
-      excerpt:
-        "Exploring innovative teaching methodologies and their profound impact on student success across diverse learning environments.",
-      author: "Dr. Michael Kgarimetsa",
-      date: "February 10, 2025",
-      readTime: "5 min read",
-    },
-    {
-      title: "Understanding Statistical Significance in Research",
-      category: "statistics",
-      image: conferenceImage,
-      excerpt:
-        "A comprehensive guide to interpreting statistical results, avoiding common pitfalls, and applying best practices in research methodology.",
-      author: "Dr. Michael Kgarimetsa",
-      date: "January 28, 2025",
-      readTime: "8 min read",
-    },
-    {
-      title: "Building Resilience Through Life Orientation Programs",
-      category: "life-orientation",
-      image: booksImage,
-      excerpt:
-        "How structured life orientation programs help students develop emotional intelligence, resilience, and essential life skills for success.",
-      author: "Dr. Michael Kgarimetsa",
-      date: "January 15, 2025",
-      readTime: "6 min read",
-    },
-    {
-      title: "Effective Problem-Solving Strategies in Mathematics",
-      category: "mathematics",
-      image: studentsImage,
-      excerpt:
-        "Practical techniques and mental frameworks that help students approach mathematical problems with confidence and systematic thinking.",
-      author: "Dr. Michael Kgarimetsa",
-      date: "December 20, 2024",
-      readTime: "7 min read",
-    },
-    {
-      title: "Data Visualization Best Practices for Academic Research",
-      category: "statistics",
-      image: conferenceImage,
-      excerpt:
-        "Learn how to create compelling and accurate data visualizations that effectively communicate research findings to diverse audiences.",
-      author: "Dr. Michael Kgarimetsa",
-      date: "December 5, 2024",
-      readTime: "6 min read",
-    },
-    {
-      title: "Goal Setting and Achievement for Academic Success",
-      category: "life-orientation",
-      image: booksImage,
-      excerpt:
-        "Evidence-based strategies for setting meaningful academic goals and developing the habits necessary to achieve them consistently.",
-      author: "Dr. Michael Kgarimetsa",
-      date: "November 18, 2024",
-      readTime: "5 min read",
-    },
-  ];
+  const { data: posts = [], isLoading } = useQuery<BlogPost[]>({
+    queryKey: ["/api/blog-posts", { status: "published" }],
+  });
 
   const filteredPosts =
     activeCategory === "all"
@@ -118,44 +68,67 @@ export default function Blog() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
-              <Card
-                key={index}
-                className="overflow-hidden hover-elevate transition-all duration-300 hover:shadow-lg flex flex-col"
-                data-testid={`card-blog-post-${index}`}
-              >
-                <div className="relative h-48">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <Badge className="absolute top-4 left-4 capitalize">
-                    {post.category === "life-orientation" ? "Life Orientation" : post.category}
-                  </Badge>
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-heading font-semibold text-xl mb-3 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 line-clamp-3 flex-1">{post.excerpt}</p>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{post.date}</span>
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="h-10 w-10 animate-spin text-primary" data-testid="loader-blog-posts" />
+            </div>
+          ) : filteredPosts.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-xl text-muted-foreground" data-testid="text-no-posts">
+                No blog posts found. Check back soon for new content!
+              </p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((post) => {
+                const imageUrl = post.coverImage || defaultImages[post.category] || studentsImage;
+                const publishDate = post.publishedAt ? format(new Date(post.publishedAt), "MMMM d, yyyy") : "";
+                
+                return (
+                  <Card
+                    key={post.id}
+                    className="overflow-hidden hover-elevate transition-all duration-300 hover:shadow-lg flex flex-col"
+                    data-testid={`card-blog-post-${post.id}`}
+                  >
+                    <div className="relative h-48">
+                      <img
+                        src={imageUrl}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <Badge className="absolute top-4 left-4 capitalize">
+                        {post.category === "life-orientation" ? "Life Orientation" : post.category}
+                      </Badge>
                     </div>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <Button variant="outline" className="w-full" data-testid={`button-read-${index}`}>
-                    Read Article <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </div>
-              </Card>
-            ))}
-          </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      <h3 className="font-heading font-semibold text-xl mb-3 line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-4 line-clamp-3 flex-1">{post.excerpt}</p>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+                        {publishDate && (
+                          <>
+                            <div className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              <span>{publishDate}</span>
+                            </div>
+                            <span>•</span>
+                          </>
+                        )}
+                        <span>{post.readTime} min read</span>
+                      </div>
+                      <Link href={`/blog/${post.slug}`}>
+                        <Button variant="outline" className="w-full" data-testid={`button-read-${post.id}`}>
+                          Read Article <ArrowRight className="h-4 w-4 ml-2" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 

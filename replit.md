@@ -61,30 +61,51 @@ Preferred communication style: Simple, everyday language.
 - Production-ready build configuration with esbuild
 
 **API Endpoints:**
-- `POST /api/send-mail`: Contact form submission handler
-  - Validates input using Zod schema
-  - Sends emails via ZeptoMail API
-  - Sends to info@omastalo.co.za
+- **Authentication:**
+  - `POST /api/auth/init-admin`: Initialize admin account (requires ADMIN_INIT_TOKEN header)
+  - `POST /api/auth/login`: Admin login with email/password
+  - `POST /api/auth/logout`: Destroy session
+  - `GET /api/auth/user`: Get current authenticated user
+- **Contact Form:**
+  - `POST /api/send-mail`: Contact form submission handler (validates via Zod, sends via ZeptoMail)
 
 **Middleware:**
+- Express session middleware with connect-pg-simple store (7-day TTL)
+- Passport.js authentication with bcryptjs password hashing
 - JSON body parsing with raw body preservation
 - Request/response logging for API routes
-- CORS and security headers (implicit via Express defaults)
+- CSRF protection via session-based tokens (implicit)
 
 **Storage Layer:**
-- In-memory storage implementation (MemStorage class) for user management
-- Interface-based design (`IStorage`) for future database migration
-- Drizzle ORM configured but database schema not yet implemented
+- PostgreSQL database with Drizzle ORM
+- `IStorage` interface in `server/storage.ts` defines CRUD operations
+- `PostgresStorage` class implements interface using Drizzle queries
+- Type-safe database operations with Zod schema validation
 
 ### Database Design
 
-**Current State:**
-- Drizzle ORM configured for PostgreSQL (`drizzle.config.ts`)
-- Schema location: `shared/schema.ts` (currently only contains Zod validation schemas)
-- Database credentials via `DATABASE_URL` environment variable
-- Migration directory: `/migrations`
+**PostgreSQL Database Schema (November 2025):**
+- **users**: Admin authentication with bcrypt-hashed passwords (id, email, username, password, isAdmin)
+- **blog_posts**: CMS blog content with categories, tags, and publish workflow (id, title, slug, content, excerpt, author, category, tags, status, publishedAt)
+- **events**: Educational workshops with dates, locations, capacity (id, title, description, startTime, endTime, location, capacity, imageUrl)
+- **rsvps**: Event registration tracking linked to events (id, eventId, name, email, phone, attendees, message)
+- **resources**: Downloadable files with metadata (id, title, description, category, fileUrl, fileName, fileSize)
+- **downloads**: Download tracking analytics (id, resourceId, downloadedAt, ipAddress)
+- **testimonials**: Client testimonials (id, name, role, organization, content, rating, imageUrl)
+- **sessions**: Session storage for connect-pg-simple (sid, sess, expire)
 
-**Rationale:** The application is structured to support database integration but currently operates without persistent storage. The contact form data is sent via email rather than stored in a database. User management schema exists in memory storage but is not actively used in the current feature set.
+**Key Design Decisions:**
+- Serial IDs for all tables (auto-incrementing integers)
+- Foreign key constraints with CASCADE delete for referential integrity
+- Timezone-aware timestamps using `timestamp().notNull().defaultNow()`
+- Text arrays for tags using `.array()` method syntax
+- Enums for status fields (blog: draft/published, event: upcoming/ongoing/completed/cancelled)
+
+**Database Operations:**
+- Schema managed via Drizzle ORM in `shared/schema.ts`
+- Push changes with `npm run db:push` (or `--force` if data loss warning)
+- PostgresJS storage adapter in `server/storage.ts` implements IStorage interface
+- Database initialized via `server/db.ts` using `@neondatabase/serverless`
 
 ### External Dependencies
 
@@ -111,9 +132,32 @@ Preferred communication style: Simple, everyday language.
 
 ### Authentication & Authorization
 
-**Current State:** No authentication system implemented. The application is a public-facing informational website with a contact form. User schema exists in storage layer but is not utilized.
+**Authentication System (November 2025):**
+- **Strategy**: Passport.js Local Strategy with bcryptjs password hashing
+- **Session Management**: Express sessions stored in PostgreSQL via connect-pg-simple
+- **Admin Initialization**: Secure token-protected endpoint (`/api/auth/init-admin`)
+  - Requires `ADMIN_INIT_TOKEN` environment variable in `X-Init-Token` header
+  - Validates email format and password strength (min 8 characters)
+  - Creates admin user with hashed password in database
+- **Frontend Auth State**: `useAuth()` hook provides authentication status
+  - Handles 401 responses gracefully (treats as unauthenticated)
+  - Returns: `user`, `isLoading`, `isAuthenticated`, `isAdmin`
+- **Session Security**: 
+  - 7-day session TTL
+  - HttpOnly cookies (prevents XSS)
+  - Secure flag in production
+  - SameSite=strict for CSRF protection
 
-**Future Consideration:** Authentication infrastructure is ready for implementation if admin functionality is needed (event management, blog posting, etc.).
+**Admin Initialization Process:**
+```bash
+# One-time setup to create admin account
+curl -X POST https://your-domain/api/auth/init-admin \
+  -H "X-Init-Token: YOUR_ADMIN_INIT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@omastalo.co.za","password":"YourSecurePassword"}'
+```
+
+**Protected Routes**: Future admin pages will use `isAdmin` check from `useAuth()` hook.
 
 ### Performance Optimizations
 
