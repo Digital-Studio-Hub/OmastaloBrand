@@ -1,9 +1,85 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import passport from "passport";
 import { contactFormSchema } from "@shared/schema";
 import { z } from "zod";
+import { setupAuth, isAuthenticated, isAdmin } from "./auth";
+import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  setupAuth(app);
+
+  app.post("/api/auth/login", (req, res, next) => {
+    passport.authenticate("local", (err: any, user: any, info: any) => {
+      if (err) {
+        return res.status(500).json({ error: "Authentication error" });
+      }
+      if (!user) {
+        return res.status(401).json({ error: info?.message || "Invalid credentials" });
+      }
+      req.logIn(user, (err) => {
+        if (err) {
+          return res.status(500).json({ error: "Login error" });
+        }
+        const { password, ...userWithoutPassword } = user;
+        return res.json({ user: userWithoutPassword });
+      });
+    })(req, res, next);
+  });
+
+  app.post("/api/auth/logout", (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        return res.status(500).json({ error: "Logout error" });
+      }
+      res.json({ success: true });
+    });
+  });
+
+  app.get("/api/auth/user", isAuthenticated, async (req, res) => {
+    const user = req.user as any;
+    const { password, ...userWithoutPassword } = user;
+    res.json(userWithoutPassword);
+  });
+
+  app.post("/api/auth/init-admin", async (req, res) => {
+    try {
+      const initToken = req.headers["x-init-token"];
+      if (initToken !== process.env.ADMIN_INIT_TOKEN) {
+        return res.status(403).json({ error: "Invalid initialization token" });
+      }
+
+      const { email, password } = req.body;
+      if (!email || !password) {
+        return res.status(400).json({ error: "Email and password are required" });
+      }
+
+      if (password.length < 8) {
+        return res.status(400).json({ error: "Password must be at least 8 characters" });
+      }
+
+      const existingAdmin = await storage.getUserByEmail(email);
+      if (existingAdmin) {
+        return res.status(400).json({ error: "User with this email already exists" });
+      }
+
+      const bcrypt = await import("bcryptjs");
+      const hashedPassword = await bcrypt.default.hash(password, 10);
+
+      await storage.createUser({
+        email,
+        username: email.split("@")[0],
+        password: hashedPassword,
+        isAdmin: true,
+      });
+
+      res.json({ success: true, message: "Admin user created successfully." });
+    } catch (error) {
+      console.error("Error creating admin:", error);
+      res.status(500).json({ error: "Failed to create admin user" });
+    }
+  });
+
   app.post("/api/send-mail", async (req, res) => {
     try {
       const data = contactFormSchema.parse(req.body);
