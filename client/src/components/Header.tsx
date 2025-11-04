@@ -29,14 +29,19 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-background"
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md shadow-md"
+          : "bg-background"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/">
-            <div className="flex items-center hover-elevate active-elevate-2 rounded-md -ml-2 p-2 cursor-pointer" data-testid="link-home-logo">
-              <img src={logoMain} alt="Omastalo" className="h-12 w-auto" />
+            <div
+              className="flex items-center hover-elevate active-elevate-2 rounded-md -ml-2 p-2 cursor-pointer"
+              data-testid="link-home-logo"
+            >
+              <img src={logoMain} alt="Omastalo" className="h-16 w-auto" />
             </div>
           </Link>
 
@@ -46,9 +51,7 @@ export function Header() {
                 <div
                   data-testid={`link-nav-${link.label.toLowerCase()}`}
                   className={`px-4 py-2 text-sm font-medium transition-colors rounded-md hover-elevate active-elevate-2 cursor-pointer ${
-                    location === link.href
-                      ? "text-primary"
-                      : "text-foreground"
+                    location === link.href ? "text-primary" : "text-foreground"
                   }`}
                 >
                   {link.label}
@@ -72,7 +75,11 @@ export function Header() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             data-testid="button-mobile-menu"
           >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </Button>
         </div>
       </div>

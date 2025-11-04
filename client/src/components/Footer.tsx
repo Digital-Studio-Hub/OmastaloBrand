@@ -26,7 +26,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <img src={logoWhite} alt="Omastalo" className="h-16 w-auto mb-4" />
+            <img src={logoWhite} alt="Omastalo" className="h-24 w-auto mb-4" />
             <p className="text-sm text-gray-300 leading-relaxed">
               Organization for Mathematics, Statistics and Life Orientation
             </p>
@@ -36,7 +36,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-lg mb-4">Quick Links</h3>
+            <h3 className="font-heading font-semibold text-lg mb-4">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -54,7 +56,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading font-semibold text-lg mb-4">Resources</h3>
+            <h3 className="font-heading font-semibold text-lg mb-4">
+              Resources
+            </h3>
             <ul className="space-y-2">
               {resourceLinks.map((link) => (
                 <li key={link.href}>
@@ -76,7 +80,10 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-gray-300">
                 <Mail className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@omastalo.co.za" className="hover:text-primary transition-colors">
+                <a
+                  href="mailto:info@omastalo.co.za"
+                  className="hover:text-primary transition-colors"
+                >
                   info@omastalo.co.za
                 </a>
               </li>
@@ -101,7 +108,11 @@ export function Footer() {
               data-testid="link-lekker-badge"
               className="hover-elevate active-elevate-2 rounded-md"
             >
-              <img src={lekkerBadge} alt="Lekker Network Level 1 Verified" className="h-24 w-auto" />
+              <img
+                src={lekkerBadge}
+                alt="Lekker Network Level 1 Verified"
+                className="h-24 w-auto"
+              />
             </a>
             <div className="flex flex-col items-center gap-2">
               <a
@@ -111,7 +122,11 @@ export function Footer() {
                 data-testid="link-lekker-logo"
                 className="hover-elevate active-elevate-2 rounded-md"
               >
-                <img src={lekkerLogo} alt="Lekker Network" className="h-8 w-auto" />
+                <img
+                  src={lekkerLogo}
+                  alt="Lekker Network"
+                  className="h-8 w-auto"
+                />
               </a>
               <p className="text-sm text-gray-400">Powered by Lekker Network</p>
             </div>
@@ -120,16 +135,25 @@ export function Footer() {
 
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-            <p>© 2025 OMASTALO — Organization for Mathematics, Statistics & Life Orientation</p>
+            <p>
+              © 2025 OMASTALO — Organization for Mathematics, Statistics & Life
+              Orientation
+            </p>
             <div className="flex items-center gap-4">
               <Link href="/privacy">
-                <div data-testid="link-privacy" className="hover:text-primary transition-colors cursor-pointer">
+                <div
+                  data-testid="link-privacy"
+                  className="hover:text-primary transition-colors cursor-pointer"
+                >
                   Privacy Policy
                 </div>
               </Link>
               <span>|</span>
               <Link href="/terms">
-                <div data-testid="link-terms" className="hover:text-primary transition-colors cursor-pointer">
+                <div
+                  data-testid="link-terms"
+                  className="hover:text-primary transition-colors cursor-pointer"
+                >
                   Terms of Service
                 </div>
               </Link>
