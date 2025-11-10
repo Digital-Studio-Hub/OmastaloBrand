@@ -8,6 +8,7 @@ OMASTALO (Organization for Mathematics, Statistics and Life Orientation) is a pr
 - Showcase Dr. Kgarimetsa's academic background and expertise
 - Promote educational events and workshops
 - Provide mentoring and educational consultation services
+- Gallery showcasing academic events, workshops, and mentorship sessions
 - Future expansion for marriage officiation services
 
 **Technology Stack:**
@@ -33,6 +34,16 @@ Preferred communication style: Simple, everyday language.
 - Reusable UI components from shadcn/ui library (buttons, cards, forms, dialogs, etc.)
 - Shared Header and Footer components across all pages
 - SEO component for dynamic meta tag management
+
+**Gallery Page (November 2025):**
+- Displays 12 stock images featuring academic seminars, workshops, and mentorship sessions
+- Responsive 3-column grid (1 column mobile, 2 tablet, 3 desktop)
+- Each gallery card includes: high-quality image, category badge, title, description
+- Hover effects: image scale animation, gradient overlay, card elevation
+- Lazy-loaded images for performance optimization
+- CTA section with links to Events and Contact pages
+- Follows Material Design principles with proper spacing and typography
+- Stock images stored in attached_assets/stock_images/
 
 **Design System:**
 - Material Design principles adapted for academic credibility
