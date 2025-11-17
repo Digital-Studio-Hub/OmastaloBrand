@@ -1,104 +1,160 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
+import { Link } from "wouter";
 
-// Academic Seminar & Workshop Images
-import seminar1 from "@assets/stock_images/academic_seminar_wor_6b93650d.jpg";
-import seminar2 from "@assets/stock_images/academic_seminar_wor_2deaee1d.jpg";
-import seminar3 from "@assets/stock_images/academic_seminar_wor_68598bd3.jpg";
-import seminar4 from "@assets/stock_images/academic_seminar_wor_ecee1ed7.jpg";
-import seminar5 from "@assets/stock_images/academic_seminar_wor_fc189b1e.jpg";
-import seminar6 from "@assets/stock_images/academic_seminar_wor_24c88a11.jpg";
-
-// Professional Mentoring & Teaching Images
-import mentoring1 from "@assets/stock_images/professional_mentori_7a8fa159.jpg";
-import mentoring2 from "@assets/stock_images/professional_mentori_1023d24c.jpg";
-import mentoring3 from "@assets/stock_images/professional_mentori_31eb784b.jpg";
-import mentoring4 from "@assets/stock_images/professional_mentori_9d2a114f.jpg";
-import mentoring5 from "@assets/stock_images/professional_mentori_bfaf3c5b.jpg";
-import mentoring6 from "@assets/stock_images/professional_mentori_4bc9b2e7.jpg";
+// Graduation Celebration Images
+import gallery01 from "@assets/gallery-graduation-family-01.jpg";
+import gallery02 from "@assets/gallery-family-celebration-02.jpg";
+import gallery03 from "@assets/gallery-speaker-presentation-03.jpg";
+import gallery04 from "@assets/gallery-professional-address-04.jpg";
+import gallery05 from "@assets/gallery-attendees-formal-05.jpg";
+import gallery06 from "@assets/gallery-celebration-attendee-06.jpg";
+import gallery07 from "@assets/gallery-graduation-family-regalia-07.jpg";
+import gallery08 from "@assets/gallery-networking-event-08.jpg";
+import gallery09 from "@assets/gallery-formal-reception-09.jpg";
+import gallery10 from "@assets/gallery-academic-gathering-10.jpg";
+import gallery11 from "@assets/gallery-attendees-community-11.jpg";
+import gallery12 from "@assets/gallery-professional-networking-12.jpg";
+import gallery13 from "@assets/gallery-family-multigenerational-13.jpg";
+import gallery14 from "@assets/gallery-group-celebration-14.jpg";
+import gallery15 from "@assets/gallery-professional-couple-15.jpg";
+import gallery16 from "@assets/gallery-graduation-achievement-16.jpg";
+import gallery17 from "@assets/gallery-couple-portrait-17.jpg";
+import gallery18 from "@assets/gallery-graduation-family-pride-18.jpg";
+import gallery19 from "@assets/gallery-platform-celebration-19.jpg";
+import gallery20 from "@assets/gallery-graduation-banner-20.jpg";
 
 export default function Gallery() {
   const galleryItems = [
     {
-      image: seminar1,
-      title: "Academic Conference 2024",
-      category: "Conference",
-      description: "National Mathematics Education Conference bringing together educators and researchers",
+      image: gallery01,
+      title: "Dr. Kgarimetsa's Graduation Celebration",
+      category: "Graduation",
+      description: "Celebrating academic achievement with family - a proud moment of accomplishment",
     },
     {
-      image: mentoring1,
-      title: "Student Mentorship Session",
-      category: "Mentorship",
-      description: "One-on-one academic mentorship and career guidance for aspiring mathematicians",
+      image: gallery03,
+      title: "Academic Leadership Presentation",
+      category: "Speaking",
+      description: "Dr. Kgarimetsa delivering an inspiring academic address",
     },
     {
-      image: seminar2,
-      title: "Statistics Workshop",
-      category: "Workshop",
-      description: "Interactive statistics workshop focused on practical data analysis techniques",
+      image: gallery20,
+      title: "Graduation Milestone Achievement",
+      category: "Celebration",
+      description: "Commemorating Dr. Michael Kgarimetsa's doctoral achievement",
     },
     {
-      image: mentoring2,
-      title: "Classroom Lecture",
-      category: "Education",
-      description: "Engaging mathematics lecture with hands-on problem-solving activities",
+      image: gallery02,
+      title: "Family Support & Celebration",
+      category: "Family",
+      description: "Sharing this momentous occasion with loved ones",
     },
     {
-      image: seminar3,
-      title: "Leadership Training Seminar",
-      category: "Training",
-      description: "Professional development workshop for educators and academic leaders",
+      image: gallery07,
+      title: "Academic Regalia Ceremony",
+      category: "Graduation",
+      description: "Family pride on graduation day - celebrating together",
     },
     {
-      image: mentoring3,
-      title: "Research Collaboration",
-      category: "Research",
-      description: "Collaborative research session exploring advanced mathematical concepts",
+      image: gallery09,
+      title: "Formal Graduation Reception",
+      category: "Reception",
+      description: "Elegant celebration honoring academic excellence",
     },
     {
-      image: seminar4,
-      title: "Life Orientation Workshop",
-      category: "Workshop",
-      description: "Comprehensive life skills development program for students and professionals",
+      image: gallery08,
+      title: "Academic Networking Event",
+      category: "Networking",
+      description: "Building connections with fellow academics and professionals",
     },
     {
-      image: mentoring4,
-      title: "Group Study Session",
-      category: "Education",
-      description: "Collaborative learning environment fostering academic excellence",
+      image: gallery04,
+      title: "Professional Development Session",
+      category: "Professional",
+      description: "Engaging with colleagues in professional discourse",
     },
     {
-      image: seminar5,
-      title: "Professional Development Seminar",
-      category: "Seminar",
-      description: "Career advancement strategies for academic and professional growth",
-    },
-    {
-      image: mentoring5,
-      title: "Individual Tutoring",
-      category: "Mentorship",
-      description: "Personalized academic support tailored to individual learning needs",
-    },
-    {
-      image: seminar6,
-      title: "Community Education Event",
+      image: gallery05,
+      title: "Distinguished Guests",
       category: "Community",
-      description: "Public education initiative bringing mathematics to the broader community",
+      description: "Academic community gathering to celebrate achievement",
     },
     {
-      image: mentoring6,
-      title: "Graduation Celebration",
-      category: "Milestone",
-      description: "Celebrating academic achievements and student success stories",
+      image: gallery06,
+      title: "Celebration Attendee",
+      category: "Community",
+      description: "Honored guests joining the graduation celebration",
+    },
+    {
+      image: gallery17,
+      title: "Partnership & Support",
+      category: "Family",
+      description: "Celebrating success with life partner",
+    },
+    {
+      image: gallery15,
+      title: "Professional Networking",
+      category: "Networking",
+      description: "Building academic and professional relationships",
+    },
+    {
+      image: gallery16,
+      title: "Academic Achievement Recognition",
+      category: "Graduation",
+      description: "Formal recognition with academic mentors and family",
+    },
+    {
+      image: gallery13,
+      title: "Multigenerational Celebration",
+      category: "Family",
+      description: "Three generations celebrating academic success together",
+    },
+    {
+      image: gallery10,
+      title: "Formal Reception Gathering",
+      category: "Reception",
+      description: "Academic colleagues and family celebrating together",
+    },
+    {
+      image: gallery11,
+      title: "Academic Community Support",
+      category: "Community",
+      description: "Colleagues attending the graduation ceremony",
+    },
+    {
+      image: gallery12,
+      title: "Professional Attendees",
+      category: "Community",
+      description: "Academic professionals gathering for the celebration",
+    },
+    {
+      image: gallery14,
+      title: "Academic Family Gathering",
+      category: "Family",
+      description: "Extended family celebrating doctoral achievement",
+    },
+    {
+      image: gallery18,
+      title: "Proud Graduate with Family",
+      category: "Graduation",
+      description: "Family support throughout the academic journey",
+    },
+    {
+      image: gallery19,
+      title: "Graduation Platform Celebration",
+      category: "Graduation",
+      description: "Special moment with academic colleagues on graduation day",
     },
   ];
 
   return (
     <div className="min-h-screen pt-20">
       <SEO
-        title="Gallery | Events & Workshops - Omastalo"
-        description="Explore highlights from Omastalo's academic lectures, workshops, mentorship sessions, and educational events featuring Dr. Michael Kgarimetsa."
+        title="Gallery | Dr. Kgarimetsa's Journey - Omastalo"
+        description="Explore highlights from Dr. Michael Kgarimetsa's graduation celebration, academic events, and professional milestones with OMASTALO."
         url="https://www.omastalo.co.za/gallery"
       />
       
@@ -109,8 +165,8 @@ export default function Gallery() {
             Gallery
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-            Highlights from OMASTALO's lectures, workshops, mentorship sessions, and educational events. 
-            Witness our commitment to academic excellence and community impact.
+            Celebrating milestones, achievements, and memorable moments from Dr. Michael Kgarimetsa's 
+            academic journey and OMASTALO's educational events.
           </p>
         </div>
       </section>
@@ -162,20 +218,12 @@ export default function Gallery() {
             of quality education and professional mentorship.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/events"
-              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground font-medium rounded-md hover-elevate active-elevate-2 transition-all"
-              data-testid="link-events"
-            >
-              View Upcoming Events
-            </a>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-3 border border-input bg-background font-medium rounded-md hover-elevate active-elevate-2 transition-all"
-              data-testid="link-contact"
-            >
-              Get In Touch
-            </a>
+            <Button asChild variant="default" data-testid="link-events">
+              <Link href="/events">View Upcoming Events</Link>
+            </Button>
+            <Button asChild variant="outline" data-testid="link-contact">
+              <Link href="/contact">Get In Touch</Link>
+            </Button>
           </div>
         </div>
       </section>
