@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import { Award, BookOpen, Users, Target } from "lucide-react";
-import professorImage from "@assets/stock_images/professional_african_6667cdef.jpg";
-import classroomImage from "@assets/stock_images/university_students__a3823dac.jpg";
+import professorImage from "@assets/gallery-graduation-family-pride-18.jpg";
+import classroomImage from "@assets/gallery-speaker-presentation-03.jpg";
 
 export default function About() {
   const milestones = [

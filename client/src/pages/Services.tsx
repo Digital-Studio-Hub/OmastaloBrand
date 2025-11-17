@@ -13,8 +13,8 @@ import {
   Target,
   Lightbulb,
 } from "lucide-react";
-import mentorshipImage from "@assets/stock_images/professional_mentors_d11d97f7.jpg";
-import workshopImage from "@assets/stock_images/diverse_group_worksh_d41dcabb.jpg";
+import mentorshipImage from "@assets/gallery-professional-address-04.jpg";
+import workshopImage from "@assets/gallery-networking-event-08.jpg";
 
 export default function Services() {
   const services = [

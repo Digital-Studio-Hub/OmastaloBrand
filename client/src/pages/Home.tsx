@@ -13,10 +13,12 @@ import {
   BookOpen,
   TrendingUp,
 } from "lucide-react";
-import professorImage from "@assets/stock_images/professional_african_6667cdef.jpg";
+import heroImage from "@assets/gallery-graduation-achievement-16.jpg";
 import conferenceImage from "@assets/stock_images/academic_conference__c73df436.jpg";
 import studentsImage from "@assets/stock_images/university_students__a3823dac.jpg";
 import mentorshipImage from "@assets/stock_images/professional_mentors_d11d97f7.jpg";
+import researchImage from "@assets/gallery-speaker-presentation-03.jpg";
+import celebrationImage from "@assets/gallery-group-celebration-14.jpg";
 
 export default function Home() {
   const services = [
@@ -60,16 +62,16 @@ export default function Home() {
 
   const blogPosts = [
     {
-      title: "The Future of Mathematics Education in South Africa",
-      category: "Mathematics",
-      excerpt: "Exploring innovative teaching methodologies and their impact on student success.",
-      image: studentsImage,
+      title: "Research Excellence in Academia",
+      category: "Research",
+      excerpt: "Insights from Dr. Kgarimetsa on building a successful research career and contributing to academic knowledge.",
+      image: researchImage,
     },
     {
-      title: "Understanding Statistical Significance",
-      category: "Statistics",
-      excerpt: "A comprehensive guide to interpreting statistical results in research.",
-      image: conferenceImage,
+      title: "Celebrating Academic Milestones",
+      category: "Achievement",
+      excerpt: "Reflecting on the journey to doctoral achievement and the importance of community support in academic success.",
+      image: celebrationImage,
     },
   ];
 
@@ -127,8 +129,8 @@ export default function Home() {
             </div>
             <div className="order-1 lg:order-2">
               <img
-                src={professorImage}
-                alt="Dr. Michael Kgarimetsa"
+                src={heroImage}
+                alt="Dr. Michael Kgarimetsa - Doctorate Graduation Achievement"
                 className="rounded-lg shadow-2xl w-full h-auto"
                 loading="eager"
               />
@@ -138,13 +140,25 @@ export default function Home() {
       </section>
 
       <section className="py-16 md:py-24 bg-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-6">
-            A Premier Academic Institution
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Omastalo Research Institute is a premier academic institution dedicated to research, innovation, and education. Founded by Dr. Michael Kgarimetsa, the Institute focuses on bridging the gap between theoretical knowledge and practical implementation through groundbreaking studies and collaborations.
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <img
+                src={researchImage}
+                alt="Dr. Kgarimetsa presenting research"
+                className="rounded-lg shadow-xl w-full h-auto"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-6">
+                A Premier Academic Institution
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Omastalo Research Institute is a premier academic institution dedicated to research, innovation, and education. Founded by Dr. Michael Kgarimetsa, the Institute focuses on bridging the gap between theoretical knowledge and practical implementation through groundbreaking studies and collaborations.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

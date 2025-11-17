@@ -19,6 +19,7 @@ import {
 import { Mail, MapPin, Phone, Clock, Loader2 } from "lucide-react";
 import { contactFormSchema, type ContactFormData } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
+import contactHeroImage from "@assets/gallery-formal-reception-09.jpg";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -67,12 +68,17 @@ export default function Contact() {
         keywords="contact Omastalo, academic research inquiries, collaboration partnerships, Dr. Kgarimetsa, Omastalo Research Institute"
         url="https://www.omastalo.co.za/contact"
       />
-      <section className="py-24 bg-gradient-to-br from-background to-muted">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
+      <section 
+        className="py-24 bg-cover bg-center relative"
+        style={{
+          backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.8), rgba(13, 27, 42, 0.8)), url(${contactHeroImage})`,
+        }}
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl mb-6 text-white">
             Contact Us
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">
+          <p className="text-xl text-gray-200 leading-relaxed">
             For inquiries, collaborations, or partnerships, please contact us
           </p>
         </div>
