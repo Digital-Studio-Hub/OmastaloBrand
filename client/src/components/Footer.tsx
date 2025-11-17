@@ -26,12 +26,12 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <img src={logoWhite} alt="Omastalo" className="h-24 w-auto mb-4" />
+            <img src={logoWhite} alt="Omastalo Research Institute" className="h-24 w-auto mb-4" />
             <p className="text-sm text-gray-300 leading-relaxed">
-              Organization for Mathematics, Statistics and Life Orientation
+              Omastalo Research Institute
             </p>
             <p className="text-sm text-gray-400 mt-2 italic">
-              Empowering minds through education, mentorship, and leadership.
+              A hub of academic excellence, innovation, and transformative knowledge.
             </p>
           </div>
 
@@ -81,19 +81,19 @@ export function Footer() {
               <li className="flex items-start gap-2 text-sm text-gray-300">
                 <Mail className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:info@omastalo.co.za"
+                  href="mailto:info@omastoloresearch.org"
                   className="hover:text-primary transition-colors"
                 >
-                  info@omastalo.co.za
+                  info@omastoloresearch.org
                 </a>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-300">
                 <Phone className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                <span>+27 [Office Number]</span>
+                <span>+27 83 951 7552</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-300">
                 <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                <span>South Africa</span>
+                <span>Tshwane, South Africa</span>
               </li>
             </ul>
           </div>
@@ -135,10 +135,10 @@ export function Footer() {
 
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-            <p>
-              © 2025 OMASTALO — Organization for Mathematics, Statistics & Life
-              Orientation
-            </p>
+            <div>
+              <p>© 2025 Omastalo Research Institute. All rights reserved.</p>
+              <p className="text-xs mt-1">Website developed for educational and research purposes. Designed under the leadership of Dr. Michael Kgarimetsa.</p>
+            </div>
             <div className="flex items-center gap-4">
               <Link href="/privacy">
                 <div

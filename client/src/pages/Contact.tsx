@@ -62,18 +62,18 @@ export default function Contact() {
   return (
     <div className="min-h-screen pt-20">
       <SEO
-        title="Contact Omastalo | Connect with Dr. Michael Kgarimetsa"
-        description="Get in touch with Omastalo for events, academic services, or collaboration inquiries. Send a message via our secure contact form."
-        keywords="contact Omastalo, academic consulting South Africa, book Dr. Kgarimetsa, Omastalo email"
+        title="Contact Omastalo Research Institute | Dr. Michael Kgarimetsa"
+        description="Get in touch with Omastalo Research Institute for inquiries, collaborations, or partnerships. Connect with Dr. Michael Kgarimetsa via our secure contact form."
+        keywords="contact Omastalo, academic research inquiries, collaboration partnerships, Dr. Kgarimetsa, Omastalo Research Institute"
         url="https://www.omastalo.co.za/contact"
       />
       <section className="py-24 bg-gradient-to-br from-background to-muted">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
-            Get in Touch
+            Contact Us
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Have questions about our services? We'd love to hear from you
+            For inquiries, collaborations, or partnerships, please contact us
           </p>
         </div>
       </section>
@@ -200,10 +200,10 @@ export default function Contact() {
                     <div>
                       <div className="font-medium mb-1">Email</div>
                       <a
-                        href="mailto:info@omastalo.co.za"
+                        href="mailto:info@omastoloresearch.org"
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        info@omastalo.co.za
+                        info@omastoloresearch.org
                       </a>
                     </div>
                   </div>
@@ -214,7 +214,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="font-medium mb-1">Phone</div>
-                      <p className="text-muted-foreground">+27 [Office Number]</p>
+                      <p className="text-muted-foreground">+27 83 951 7552</p>
                     </div>
                   </div>
 
@@ -223,8 +223,8 @@ export default function Contact() {
                       <MapPin className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <div className="font-medium mb-1">Location</div>
-                      <p className="text-muted-foreground">South Africa</p>
+                      <div className="font-medium mb-1">Address</div>
+                      <p className="text-muted-foreground">Tshwane, South Africa</p>
                     </div>
                   </div>
 
@@ -235,9 +235,7 @@ export default function Contact() {
                     <div>
                       <div className="font-medium mb-1">Office Hours</div>
                       <p className="text-muted-foreground">
-                        Monday - Friday: 9:00 AM - 5:00 PM
-                        <br />
-                        Saturday: By appointment
+                        Monday – Friday, 8:00 AM to 5:00 PM
                       </p>
                     </div>
                   </div>
