@@ -151,9 +151,9 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-4">Our Services</h2>
+            <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-4">Research & Academic Services</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive educational solutions tailored to your needs
+              Connecting researchers, students, and professionals in sharing knowledge and innovation
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -251,10 +251,8 @@ export default function Home() {
                 <div className="p-6">
                   <h3 className="font-heading font-semibold text-xl mb-2">{post.title}</h3>
                   <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
-                  <Link href="/blog">
-                    <a className="inline-flex items-center gap-2 text-primary font-medium hover-elevate active-elevate-2 rounded-md py-1 -ml-1 px-1">
-                      Read More <ArrowRight className="h-4 w-4" />
-                    </a>
+                  <Link href="/blog" className="inline-flex items-center gap-2 text-primary font-medium hover-elevate active-elevate-2 rounded-md py-1 -ml-1 px-1">
+                    Read More <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </Card>
@@ -291,11 +289,9 @@ export default function Home() {
           <p className="text-xl mb-8 text-gray-200">
             Get in touch to discuss how we can help you achieve academic excellence
           </p>
-          <Link href="/contact">
-            <Button size="lg" data-testid="button-get-in-touch">
-              Get in Touch
-            </Button>
-          </Link>
+          <Button asChild size="lg" data-testid="button-get-in-touch">
+            <Link href="/contact">Get in Touch</Link>
+          </Button>
         </div>
       </section>
     </div>

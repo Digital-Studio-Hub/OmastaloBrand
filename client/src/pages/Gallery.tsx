@@ -153,8 +153,8 @@ export default function Gallery() {
   return (
     <div className="min-h-screen pt-20">
       <SEO
-        title="Gallery | Dr. Kgarimetsa's Journey - Omastalo"
-        description="Explore highlights from Dr. Michael Kgarimetsa's graduation celebration, academic events, and professional milestones with OMASTALO."
+        title="Gallery | Dr. Kgarimetsa's Doctorate Graduation Celebration - October 18, 2025"
+        description="View photos from Dr. Michael Kgarimetsa's Doctorate Graduation Celebration held on October 18, 2025. Browse family moments, academic milestones, and celebration highlights from this special achievement."
         url="https://www.omastalo.co.za/gallery"
       />
       
