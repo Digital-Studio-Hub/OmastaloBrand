@@ -83,9 +83,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Omastalo | Organization for Mathematics, Statistics & Life Orientation"
-        description="Welcome to Omastalo — led by Dr. Michael Kgarimetsa, empowering minds through Mathematics, Statistics, and Life Orientation. Explore mentorship, academic services, and personal development programs."
-        keywords="Omastalo, Mathematics education, Statistics consulting, Life Orientation training, Dr. Michael Kgarimetsa, academic mentorship, South Africa education"
+        title="Omastalo Research Institute | Academic Excellence & Innovation"
+        description="Welcome to Omastolo Research Institute — led by Dr. Michael Kgarimetsa. A premier academic institution dedicated to research, innovation, and education. Connecting researchers, students, and professionals."
+        keywords="Omastolo Research Institute, Dr. Michael Kgarimetsa, academic research, innovation, education, research publications, academic programs, South Africa"
         url="https://www.omastalo.co.za"
       />
       <section className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-background to-muted">
@@ -93,17 +93,22 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <div className="text-primary font-heading font-semibold text-sm tracking-wide mb-4">
-                OMASTALO
+                OMASTALO RESEARCH INSTITUTE
               </div>
               <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
-                Dr. Michael Kgarimetsa
+                Welcome Message from the CEO
               </h1>
-              <p className="text-xl sm:text-2xl text-muted-foreground font-heading font-medium mb-4">
-                Organization for Mathematics, Statistics & Life Orientation
+              <p className="text-lg text-muted-foreground mb-6 max-w-xl leading-relaxed">
+                Welcome to Omastalo Research Institute, a hub of academic excellence, innovation, and transformative knowledge. I am Dr. Michael Kgarimetsa, the Founder and CEO of this Institute. Born in Manamakgotheng, Modderkuil, my journey has been one of perseverance, faith, and passion for advancing research and empowering scholars to create solutions that matter.
+              </p>
+              <p className="text-lg text-muted-foreground mb-6 max-w-xl leading-relaxed">
+                Our mission at Omastolo Research Institute is to develop a platform that connects researchers, students, and professionals in sharing knowledge and innovation. This website serves as a digital home for our research initiatives, academic programs, upcoming events, and community impact stories.
               </p>
               <p className="text-lg text-muted-foreground italic mb-8 max-w-xl leading-relaxed">
-                "Empowering minds through education, inspiring excellence through mentorship, and
-                building leaders through dedication."
+                I warmly welcome you to explore, connect, and be part of our journey.
+              </p>
+              <p className="text-base font-heading font-semibold text-foreground mb-8">
+                — Dr. Michael Kgarimetsa, CEO and Founder
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" data-testid="button-book-event" className="w-full sm:w-auto">
@@ -135,13 +140,10 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-6">
-            Advancing Education Through Excellence
+            A Premier Academic Institution
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            OMASTALO is dedicated to fostering academic excellence and personal growth through
-            comprehensive educational programs in Mathematics, Statistics, and Life Orientation. Led
-            by Dr. Michael Kgarimetsa, we provide world-class mentorship, training, and guidance to
-            students, educators, and professionals across South Africa.
+            Omastalo Research Institute is a premier academic institution dedicated to research, innovation, and education. Founded by Dr. Michael Kgarimetsa, the Institute focuses on bridging the gap between theoretical knowledge and practical implementation through groundbreaking studies and collaborations.
           </p>
         </div>
       </section>

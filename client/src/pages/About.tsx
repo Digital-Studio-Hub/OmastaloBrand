@@ -31,32 +31,32 @@ export default function About() {
   const values = [
     {
       icon: Award,
-      title: "Excellence",
-      description: "Committed to the highest standards in education and mentorship",
-    },
-    {
-      icon: BookOpen,
-      title: "Knowledge",
-      description: "Fostering continuous learning and intellectual growth",
-    },
-    {
-      icon: Users,
-      title: "Community",
-      description: "Building strong networks of educators and learners",
+      title: "Excellence in Research",
+      description: "Committed to the highest standards in academic research and innovation",
     },
     {
       icon: Target,
-      title: "Impact",
-      description: "Creating lasting positive change in education",
+      title: "Integrity and Ethics",
+      description: "Upholding ethical principles in all research and educational activities",
+    },
+    {
+      icon: BookOpen,
+      title: "Innovation and Technology",
+      description: "Leveraging cutting-edge technology to advance research outcomes",
+    },
+    {
+      icon: Users,
+      title: "Collaboration and Growth",
+      description: "Fostering partnerships and continuous development among researchers",
     },
   ];
 
   return (
     <div className="min-h-screen pt-20">
       <SEO
-        title="About Dr. Michael Kgarimetsa | Omastalo Founder & Academic Leader"
-        description="Learn more about Dr. Michael Kgarimetsa, founder of Omastalo — an academic organization dedicated to Mathematics, Statistics, and Life Orientation excellence."
-        keywords="Dr. Michael Kgarimetsa biography, academic leader South Africa, mathematics educator, statistics expert, life orientation mentor"
+        title="About Omastalo Research Institute | Dr. Michael Kgarimetsa"
+        description="Learn more about Dr. Michael Kgarimetsa and Omastalo Research Institute — a premier academic institution dedicated to research, innovation, and education excellence."
+        keywords="Dr. Michael Kgarimetsa biography, Omastalo Research Institute, academic research, innovation, education, Southern Africa"
         url="https://www.omastalo.co.za/about"
       />
       <section
@@ -67,10 +67,10 @@ export default function About() {
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
-            About Dr. Michael Kgarimetsa
+            About Omastalo Research Institute
           </h1>
           <p className="text-xl leading-relaxed">
-            Academic Leader, Educator, and Mentor Dedicated to Excellence
+            A Premier Academic Institution Dedicated to Research, Innovation, and Education
           </p>
         </div>
       </section>
@@ -87,24 +87,16 @@ export default function About() {
               />
             </div>
             <div>
-              <h2 className="font-heading font-semibold text-3xl mb-6">Biography</h2>
+              <h2 className="font-heading font-semibold text-3xl mb-6">Biography of Dr. Michael Kgarimetsa</h2>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  Dr. Michael Kgarimetsa is a distinguished academic professional with over 15 years
-                  of experience in mathematics education, statistical analysis, and educational
-                  leadership. His passion for empowering learners has made him a sought-after mentor
-                  and speaker across South Africa.
+                  Dr. Michael Kgarimetsa was born in Manamakgotheng, Modderkuil. He is a visionary academic and leader whose commitment to research and education has shaped numerous initiatives across Southern Africa.
                 </p>
                 <p>
-                  With a doctorate in Mathematics Education, Dr. Kgarimetsa has dedicated his career
-                  to developing innovative teaching methodologies that make complex concepts
-                  accessible to all learners. His work has impacted hundreds of students, educators,
-                  and institutions.
+                  His work in developing advanced forecasting models and academic research frameworks has earned him recognition in multiple disciplines. Dr. Kgarimetsa's groundbreaking research includes developing hybrid forecasting models and contributing to health sciences research.
                 </p>
                 <p>
-                  As the founder of OMASTALO, Dr. Kgarimetsa continues to advance the fields of
-                  mathematics, statistics, and life orientation through comprehensive educational
-                  programs, workshops, and personal mentorship.
+                  Beyond academia, Dr. Kgarimetsa is passionate about mentorship, community development, and uplifting young scholars to pursue excellence in their respective fields. As the founder of Omastalo Research Institute, he continues to bridge the gap between theoretical knowledge and practical implementation.
                 </p>
               </div>
             </div>
@@ -157,11 +149,10 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-4">
-              Mission & Values
+              Our Core Values
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              OMASTALO is committed to advancing education in mathematics, statistics, and life
-              orientation through excellence, innovation, and dedication to learner success.
+              Omastalo Research Institute is dedicated to research, innovation, and education. We focus on bridging the gap between theoretical knowledge and practical implementation through groundbreaking studies and collaborations.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
