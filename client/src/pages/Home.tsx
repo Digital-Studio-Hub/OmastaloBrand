@@ -23,71 +23,71 @@ import celebrationImage from "@assets/gallery-group-celebration-14.jpg";
 export default function Home() {
   const services = [
     {
-      icon: GraduationCap,
-      title: "Mathematics Education",
-      description: "Expert guidance in mathematical concepts and problem-solving techniques.",
-    },
-    {
-      icon: BarChart3,
-      title: "Statistics Coaching",
-      description: "Comprehensive statistical analysis and data interpretation training.",
+      icon: Users,
+      title: "Youth Development",
+      description: "Career guidance, mentorship, and skills development programmes for unemployed youth.",
     },
     {
       icon: Heart,
-      title: "Life Orientation",
-      description: "Personal development and leadership mentorship programs.",
+      title: "Community Empowerment",
+      description: "Food relief, health awareness, and social support programmes for vulnerable households.",
+    },
+    {
+      icon: GraduationCap,
+      title: "Education & Capacity Building",
+      description: "Educational programmes and leadership development for community transformation.",
     },
   ];
 
   const events = [
     {
-      title: "Advanced Statistics Workshop",
-      date: "March 15, 2025",
+      title: "Youth Career Guidance Workshop",
+      date: "March 15, 2026",
       category: "Workshop",
-      location: "Online",
+      location: "Tshwane",
     },
     {
-      title: "Mathematics Excellence Seminar",
-      date: "April 2, 2025",
-      category: "Seminar",
-      location: "Johannesburg",
+      title: "Community Food Relief Programme",
+      date: "Ongoing",
+      category: "Community Service",
+      location: "Tshwane",
     },
     {
-      title: "Leadership Development Program",
-      date: "April 20, 2025",
+      title: "Leadership & Mentorship Training",
+      date: "April 20, 2026",
       category: "Training",
-      location: "Cape Town",
+      location: "Tshwane",
     },
   ];
 
   const blogPosts = [
     {
-      title: "Research Excellence in Academia",
-      category: "Research",
-      excerpt: "Insights from Dr. Kgarimetsa on building a successful research career and contributing to academic knowledge.",
+      title: "Empowering Communities Through Service",
+      category: "Community Impact",
+      excerpt: "Insights from Dr. Kgarimetsa on building stronger communities through dedicated public service and transformative programmes.",
       image: researchImage,
     },
     {
-      title: "Celebrating Academic Milestones",
+      title: "Celebrating Community Transformation",
       category: "Achievement",
-      excerpt: "Reflecting on the journey to doctoral achievement and the importance of community support in academic success.",
+      excerpt: "Reflecting on the journey of Omastalo Organisation and the lives transformed through community development initiatives.",
       image: celebrationImage,
     },
   ];
 
   const stats = [
-    { number: "500+", label: "Students Mentored" },
-    { number: "50+", label: "Events Hosted" },
-    { number: "15+", label: "Years Experience" },
-    { number: "100%", label: "Dedication" },
+    { number: "1000+", label: "Lives Impacted" },
+    { number: "50+", label: "Community Programmes" },
+    { number: "15+", label: "Years of Service" },
+    { number: "100%", label: "Community Focused" },
   ];
 
   return (
     <div className="min-h-screen">
       <SEO
-        title="Omastalo Research Institute | Academic Excellence & Innovation"
-        description="Welcome to Omastolo Research Institute — led by Dr. Michael Kgarimetsa. A premier academic institution dedicated to research, innovation, and education. Connecting researchers, students, and professionals."
-        keywords="Omastolo Research Institute, Dr. Michael Kgarimetsa, academic research, innovation, education, research publications, academic programs, South Africa"
+        title="Omastalo Organisation | Community Empowerment & Social Development"
+        description="Welcome to Omastalo Organisation — founded by Dr. Michael Kgarimetsa. Dedicated to empowering communities through impactful programmes addressing poverty, youth development, and social transformation across Tshwane."
+        keywords="Omastalo Organisation, Dr. Michael Kgarimetsa, community development, social transformation, youth development, poverty alleviation, public service, South Africa"
         url="https://www.omastalo.co.za"
       />
       <section className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-background to-muted">
@@ -95,22 +95,22 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <div className="text-primary font-heading font-semibold text-sm tracking-wide mb-4">
-                OMASTALO RESEARCH INSTITUTE
+                OMASTALO ORGANISATION
               </div>
               <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
-                Welcome Message from the CEO
+                Welcome Message from the Founder
               </h1>
               <p className="text-lg text-muted-foreground mb-6 max-w-xl leading-relaxed">
-                Welcome to Omastalo Research Institute, a hub of academic excellence, innovation, and transformative knowledge. I am Dr. Michael Kgarimetsa, the Founder and CEO of this Institute. Born in Manamakgotheng, Modderkuil, my journey has been one of perseverance, faith, and passion for advancing research and empowering scholars to create solutions that matter.
+                Welcome to Omastalo Organisation, a vehicle for hope dedicated to empowering communities across Tshwane and beyond. I am Dr. Michael Kgarimetsa, the Founder of this Organisation. Born in Manamakgotheng, Modderkuil, my journey has been one of perseverance, faith, and passion for public service, social development, and transforming lives.
               </p>
               <p className="text-lg text-muted-foreground mb-6 max-w-xl leading-relaxed">
-                Our mission at Omastolo Research Institute is to develop a platform that connects researchers, students, and professionals in sharing knowledge and innovation. This website serves as a digital home for our research initiatives, academic programs, upcoming events, and community impact stories.
+                Our mission at Omastalo Organisation is to deliver impactful programmes that address poverty, youth development, health awareness, and social transformation. This website serves as a digital home for our community initiatives, programmes, upcoming events, and stories of impact.
               </p>
               <p className="text-lg text-muted-foreground italic mb-8 max-w-xl leading-relaxed">
                 I warmly welcome you to explore, connect, and be part of our journey.
               </p>
               <p className="text-base font-heading font-semibold text-foreground mb-8">
-                — Dr. Michael Kgarimetsa, CEO and Founder
+                — Dr. Michael Kgarimetsa, Founder
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" data-testid="button-book-event" className="w-full sm:w-auto">
@@ -152,10 +152,10 @@ export default function Home() {
             </div>
             <div>
               <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-6">
-                A Premier Academic Institution
+                A Leading Community Development Organisation
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Omastalo Research Institute is a premier academic institution dedicated to research, innovation, and education. Founded by Dr. Michael Kgarimetsa, the Institute focuses on bridging the gap between theoretical knowledge and practical implementation through groundbreaking studies and collaborations.
+                Omastalo Organisation is a community-driven organisation dedicated to social development, empowerment, and transformation. Founded by Dr. Michael Kgarimetsa, the Organisation delivers impactful programmes in education, food relief, career guidance, mentorship, and capacity building, changing communities one household at a time.
               </p>
             </div>
           </div>
@@ -165,9 +165,9 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-4">Research & Academic Services</h2>
+            <h2 className="font-heading font-semibold text-3xl sm:text-4xl mb-4">Community Development Programmes</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Connecting researchers, students, and professionals in sharing knowledge and innovation
+              Delivering impactful programmes that empower communities and transform lives
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">

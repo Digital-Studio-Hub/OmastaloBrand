@@ -63,9 +63,9 @@ export default function Contact() {
   return (
     <div className="min-h-screen pt-20">
       <SEO
-        title="Contact Omastalo Research Institute | Dr. Michael Kgarimetsa"
-        description="Get in touch with Omastalo Research Institute for inquiries, collaborations, or partnerships. Connect with Dr. Michael Kgarimetsa via our secure contact form."
-        keywords="contact Omastalo, academic research inquiries, collaboration partnerships, Dr. Kgarimetsa, Omastalo Research Institute"
+        title="Contact Omastalo Organisation | Dr. Michael Kgarimetsa"
+        description="Get in touch with Omastalo Organisation for inquiries, community programmes, or partnerships. Connect with Dr. Michael Kgarimetsa via our secure contact form."
+        keywords="contact Omastalo, community development inquiries, collaboration partnerships, Dr. Kgarimetsa, Omastalo Organisation"
         url="https://www.omastalo.co.za/contact"
       />
       <section 
@@ -206,10 +206,10 @@ export default function Contact() {
                     <div>
                       <div className="font-medium mb-1">Email</div>
                       <a
-                        href="mailto:info@omastoloresearch.org"
+                        href="mailto:info@omastalo.co.za"
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        info@omastoloresearch.org
+                        info@omastalo.co.za
                       </a>
                     </div>
                   </div>

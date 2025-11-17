@@ -8,55 +8,55 @@ export default function About() {
   const milestones = [
     {
       year: "2010",
-      title: "Doctorate in Mathematics Education",
-      description: "Completed PhD focusing on innovative teaching methodologies",
-    },
-    {
-      year: "2012",
-      title: "Founded OMASTALO",
-      description: "Established the organization to promote excellence in education",
+      title: "Community Impact Begins",
+      description: "Started grassroots initiatives addressing poverty and youth unemployment in Tshwane",
     },
     {
       year: "2015",
-      title: "National Recognition",
-      description: "Received award for outstanding contribution to mathematics education",
+      title: "Founded Omastalo Organisation",
+      description: "Established the organisation to deliver impactful community development programmes",
     },
     {
       year: "2020",
-      title: "Expanded Programs",
-      description: "Launched comprehensive leadership development initiatives",
+      title: "Expanded Reach",
+      description: "Launched comprehensive food relief, career guidance, and mentorship programs",
+    },
+    {
+      year: "2025",
+      title: "Earned Doctor of Business Administration",
+      description: "Completed DBA to strengthen organisational leadership and strategic operations",
     },
   ];
 
   const values = [
     {
       icon: Award,
-      title: "Excellence in Research",
-      description: "Committed to the highest standards in academic research and innovation",
+      title: "Excellence in Service",
+      description: "Committed to the highest standards in community development and programme delivery",
     },
     {
       icon: Target,
-      title: "Integrity and Ethics",
-      description: "Upholding ethical principles in all research and educational activities",
+      title: "Integrity and Accountability",
+      description: "Upholding ethical principles and transparent governance in all community activities",
     },
     {
       icon: BookOpen,
-      title: "Innovation and Technology",
-      description: "Leveraging cutting-edge technology to advance research outcomes",
+      title: "Empowerment and Education",
+      description: "Building capacity through education, mentorship, and skills development programmes",
     },
     {
       icon: Users,
-      title: "Collaboration and Growth",
-      description: "Fostering partnerships and continuous development among researchers",
+      title: "Community Collaboration",
+      description: "Fostering partnerships with government, churches, and local stakeholders for greater impact",
     },
   ];
 
   return (
     <div className="min-h-screen pt-20">
       <SEO
-        title="About Omastalo Research Institute | Dr. Michael Kgarimetsa"
-        description="Learn more about Dr. Michael Kgarimetsa and Omastalo Research Institute — a premier academic institution dedicated to research, innovation, and education excellence."
-        keywords="Dr. Michael Kgarimetsa biography, Omastalo Research Institute, academic research, innovation, education, Southern Africa"
+        title="About Omastalo Organisation | Dr. Michael Kgarimetsa - Founder"
+        description="Learn about Dr. Michael Kgarimetsa, Founder of Omastalo Organisation. A highly accomplished leader dedicated to community empowerment, social development, and organisational excellence across Tshwane and beyond."
+        keywords="Dr. Michael Kgarimetsa biography, Omastalo Organisation, community development, social transformation, youth development, public service, South Africa"
         url="https://www.omastalo.co.za/about"
       />
       <section
@@ -67,10 +67,10 @@ export default function About() {
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h1 className="font-heading font-bold text-4xl sm:text-5xl lg:text-6xl mb-6">
-            About Omastalo Research Institute
+            About Dr. Michael Kgarimetsa
           </h1>
           <p className="text-xl leading-relaxed">
-            A Premier Academic Institution Dedicated to Research, Innovation, and Education
+            Founder of Omastalo Organisation
           </p>
         </div>
       </section>
@@ -90,13 +90,19 @@ export default function About() {
               <h2 className="font-heading font-semibold text-3xl mb-6">Biography of Dr. Michael Kgarimetsa</h2>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  Dr. Michael Kgarimetsa was born in Manamakgotheng, Modderkuil. He is a visionary academic and leader whose commitment to research and education has shaped numerous initiatives across Southern Africa.
+                  Dr. Michael Kgarimetsa is a highly accomplished South African leader, academic, and community-driven strategist known for his unwavering commitment to public service, social development, and organisational excellence. As the Founder of Omastalo Organisation, he has dedicated his life to empowering communities across Tshwane and beyond through impactful programmes that address poverty, youth development, health awareness, and social transformation.
                 </p>
                 <p>
-                  His work in developing advanced forecasting models and academic research frameworks has earned him recognition in multiple disciplines. Dr. Kgarimetsa's groundbreaking research includes developing hybrid forecasting models and contributing to health sciences research.
+                  With over 15 years of professional experience, Dr. Kgarimetsa has built a distinguished career in Supply Chain Management, Logistics, Public Administration, Research, and Data Analytics. He holds a Doctor of Business Administration (DBA), complementing a solid background in inventory management and strategic operations. His expertise spans both the public and private sectors, making him a respected figure in leadership, governance, and community engagement.
                 </p>
                 <p>
-                  Beyond academia, Dr. Kgarimetsa is passionate about mentorship, community development, and uplifting young scholars to pursue excellence in their respective fields. As the founder of Omastalo Research Institute, he continues to bridge the gap between theoretical knowledge and practical implementation.
+                  Driven by a passion for progress and accountability, Dr. Kgarimetsa founded Omastalo Organisation as a response to socio-economic challenges affecting vulnerable households, unemployed youth, and disadvantaged communities. Under his leadership, the organisation has become a vehicle for hope—delivering programmes in education, food relief, career guidance, mentorship, and capacity building. His hands-on approach and strong networks with government departments, churches, local leaders, and stakeholders amplify the organisation's reach and impact.
+                </p>
+                <p>
+                  Beyond organisational leadership, Dr. Kgarimetsa is known as a mentor, motivator, and public speaker whose voice inspires resilience, dignity, and personal growth. His work continues to amplify the importance of servant leadership, ethical governance, and community upliftment.
+                </p>
+                <p>
+                  Driven by integrity and compassion, Dr. Michael Kgarimetsa remains committed to expanding Omastalo's footprint and transforming it into one of South Africa's leading development organisations. His life's mission is simple yet powerful: to change communities, one household at a time.
                 </p>
               </div>
             </div>
@@ -152,7 +158,7 @@ export default function About() {
               Our Core Values
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Omastalo Research Institute is dedicated to research, innovation, and education. We focus on bridging the gap between theoretical knowledge and practical implementation through groundbreaking studies and collaborations.
+              Omastalo Organisation is dedicated to community empowerment, social development, and transformative leadership. We focus on delivering impactful programmes that address poverty, youth development, and capacity building across Tshwane and beyond.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

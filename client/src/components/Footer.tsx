@@ -26,12 +26,12 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <img src={logoWhite} alt="Omastalo Research Institute" className="h-24 w-auto mb-4" />
+            <img src={logoWhite} alt="Omastalo Organisation" className="h-24 w-auto mb-4" />
             <p className="text-sm text-gray-300 leading-relaxed">
-              Omastalo Research Institute
+              Omastalo Organisation
             </p>
             <p className="text-sm text-gray-400 mt-2 italic">
-              A hub of academic excellence, innovation, and transformative knowledge.
+              Empowering communities, transforming lives, one household at a time.
             </p>
           </div>
 
@@ -81,10 +81,10 @@ export function Footer() {
               <li className="flex items-start gap-2 text-sm text-gray-300">
                 <Mail className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:info@omastoloresearch.org"
+                  href="mailto:info@omastalo.co.za"
                   className="hover:text-primary transition-colors"
                 >
-                  info@omastoloresearch.org
+                  info@omastalo.co.za
                 </a>
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-300">
@@ -136,8 +136,8 @@ export function Footer() {
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
             <div>
-              <p>© 2025 Omastalo Research Institute. All rights reserved.</p>
-              <p className="text-xs mt-1">Website developed for educational and research purposes. Designed under the leadership of Dr. Michael Kgarimetsa.</p>
+              <p>© 2025 Omastalo Organisation. All rights reserved.</p>
+              <p className="text-xs mt-1">Website developed for community empowerment and social development. Designed under the leadership of Dr. Michael Kgarimetsa.</p>
             </div>
             <div className="flex items-center gap-4">
               <Link href="/privacy">
