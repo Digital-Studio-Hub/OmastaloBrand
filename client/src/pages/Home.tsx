@@ -106,21 +106,18 @@ export default function Home() {
                 building leaders through dedication."
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button size="lg" data-testid="button-book-event" className="w-full sm:w-auto">
-                    Book an Event
-                  </Button>
-                </Link>
-                <Link href="/about">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    data-testid="button-learn-more"
-                    className="w-full sm:w-auto"
-                  >
-                    Learn More
-                  </Button>
-                </Link>
+                <Button asChild size="lg" data-testid="button-book-event" className="w-full sm:w-auto">
+                  <Link href="/contact">Book an Event</Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  data-testid="button-learn-more"
+                  className="w-full sm:w-auto"
+                >
+                  <Link href="/about">Learn More</Link>
+                </Button>
               </div>
             </div>
             <div className="order-1 lg:order-2">
@@ -169,10 +166,8 @@ export default function Home() {
                 </div>
                 <h3 className="font-heading font-semibold text-xl mb-3">{service.title}</h3>
                 <p className="text-muted-foreground mb-4">{service.description}</p>
-                <Link href="/services">
-                  <a className="inline-flex items-center gap-2 text-primary font-medium hover-elevate active-elevate-2 rounded-md py-1 -ml-1 px-1">
-                    Learn More <ArrowRight className="h-4 w-4" />
-                  </a>
+                <Link href="/services" className="inline-flex items-center gap-2 text-primary font-medium hover-elevate active-elevate-2 rounded-md py-1 -ml-1 px-1">
+                  Learn More <ArrowRight className="h-4 w-4" />
                 </Link>
               </Card>
             ))}
@@ -191,11 +186,9 @@ export default function Home() {
                 Join us for upcoming seminars and workshops
               </p>
             </div>
-            <Link href="/events">
-              <Button variant="outline" data-testid="button-view-all-events">
-                View All
-              </Button>
-            </Link>
+            <Button asChild variant="outline" data-testid="button-view-all-events">
+              <Link href="/events">View All</Link>
+            </Button>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {events.map((event, index) => (

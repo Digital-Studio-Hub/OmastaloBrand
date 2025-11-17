@@ -1,0 +1,45 @@
+Website Structure and Content Draft for Omastolo Research Institute
+Prepared for: Dr. Michael Kgarimetsa
+Date: October 2025
+1. Welcome Page (Message from the CEO)
+Welcome to Omastolo Research Institute, a hub of academic excellence, innovation, and transformative knowledge. I am Dr. Michael Kgarimetsa, the Founder and CEO of this Institute. Born in Manamakgotheng, Modderkuil, my journey has been one of perseverance, faith, and passion for advancing research and empowering scholars to create solutions that matter. Our mission at Omastolo Research Institute is to develop a platform that connects researchers, students, and professionals in shaping Africa’s academic and economic future.
+This website serves as a digital home for our research initiatives, academic programs, upcoming events, and community impact stories. I warmly welcome you to explore, connect, and be part of our journey.
+— Dr. Michael Kgarimetsa, CEO and Founder
+2. About Omastolo Research Institute
+Omastolo Research Institute is a premier academic institution dedicated to research, innovation, and education. Founded by Dr. Michael Kgarimetsa, the Institute focuses on bridging the gap between theoretical knowledge and practical implementation through groundbreaking studies and collaborations.
+Our Core Values:
+• Excellence in Research
+• Integrity and Ethics
+• Innovation and Technology
+• Collaboration and Growth
+3. Biography of Dr. Michael Kgarimetsa
+Dr. Michael Kgarimetsa was born in Manamakgotheng, Modderkuil. He is a visionary academic and leader whose commitment to research and education has shaped numerous initiatives across Southern Africa. His work in developing advanced forecasting models and academic research frameworks has earned him recognition in multiple disciplines.
+Beyond academia, Dr. Kgarimetsa is passionate about mentorship, community development, and uplifting young scholars to pursue excellence in their respective fields.
+4. Research and Publications
+This page will feature published articles, research papers, and collaborative projects by Omastolo Research Institute. Visitors will be able to download and read publications in economics, statistics, health sciences, and other fields.
+Examples of Featured Works:
+• Developing a Hybrid MGARCH(6,1,6)-ARFIMA(6,3) Model for Forecasting Exchange Rate Volatility
+• Profile of Immunocompromised Patients on Tuberculosis Treatment in a District Hospital, Tshwane
+5. Upcoming Events (2026)
+The Omastolo Research Institute hosts academic and community-based events throughout the year. Below is a list of planned events between February and November 2026:
+• February 10 – Annual Research Symposium
+• March 5 – Graduate Mentorship Workshop
+• April 20 – Innovation and Technology Summit
+• May 15 – Young Scholars Conference
+• June 10 – Data Science and Analytics Forum
+• July 25 – Academic Writing Bootcamp
+• August 16 – African Economic Research Dialogue
+• September 12 – Health and Social Sciences Seminar
+• October 18 – 1st Anniversary of Doctorate Celebration
+• November 9 – Closing Gala and Awards Ceremony
+6. Graduation Celebration Photo Gallery
+This page will feature photos from Dr. Michael Kgarimetsa’s Doctorate Graduation Celebration held on 18 October 2025. Visitors will be able to browse images capturing the joyous moments shared with family, friends, and colleagues.
+7. Contact Us
+For inquiries, collaborations, or partnerships, please contact us:
+Email: info@omastoloresearch.org
+Phone: +27839517552
+Address: Tshwane, South Africa
+Office Hours: Monday – Friday, 8:00 AM to 5:00 PM
+8. Footer and Copyright Information
+© 2025 Omastolo Research Institute. All rights reserved.
+Website developed for educational and research purposes. Designed under the leadership of Dr. Michael Kgarimetsa.
