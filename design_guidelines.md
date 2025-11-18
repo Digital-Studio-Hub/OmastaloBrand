@@ -1,286 +1,208 @@
-# Omastalo Design Guidelines
+# Freshmo Design Guidelines
 
 ## Design Approach
 
-**Selected Approach**: Material Design System with Academic Brand Customization
+**Reference-Based**: Drawing inspiration from Glossier's clean beauty aesthetic, Apple's minimalist product photography, and Shopify's e-commerce patterns. The design emphasizes fresh, health-focused visuals with vibrant mint/turquoise brand colors creating an energetic yet professional shopping experience.
 
-This academic brand platform requires the credibility and structure of Material Design while maintaining a distinctive personal brand identity. We'll adapt Material's elevation, typography hierarchy, and interaction patterns to create an authoritative yet approachable academic presence.
-
-**Key Design Principles**:
-- Academic Authority: Clean, structured layouts that establish credibility
-- Personal Connection: Warm, approachable elements that humanize expertise
-- Progressive Disclosure: Information architecture that guides users from overview to depth
-- Performance Excellence: Every design decision optimized for sub-1.5s load times
+**Key Principles**:
+- Fresh & Clean: Abundant whitespace with strategic turquoise accents
+- Product-First: Large, high-quality product photography dominates
+- Trust & Health: Clinical cleanliness meets approachable warmth
+- Frictionless Commerce: Streamlined path from discovery to checkout
 
 ---
 
 ## Typography System
 
-**Font Families** (via Google Fonts CDN):
-- Primary: 'Poppins' - Headers, CTAs, Navigation (Weights: 400, 500, 600, 700)
-- Secondary: 'Inter' - Body text, captions, metadata (Weights: 400, 500, 600)
+**Fonts** (Google Fonts):
+- Primary: 'Outfit' - Headers, product names, CTAs (Weights: 400, 500, 600, 700)
+- Secondary: 'Inter' - Body, descriptions, UI elements (Weights: 400, 500)
 
-**Type Scale** (Desktop → Mobile responsive):
-- Hero Heading: 3.5rem → 2.25rem (Poppins 700)
-- Page Title: 2.5rem → 1.875rem (Poppins 600)
-- Section Heading: 2rem → 1.5rem (Poppins 600)
-- Subsection: 1.5rem → 1.25rem (Poppins 500)
+**Type Scale**:
+- Hero Heading: 4rem → 2.5rem (Outfit 700)
+- Product Title: 2.25rem → 1.75rem (Outfit 600)
+- Section Heading: 1.875rem → 1.5rem (Outfit 600)
 - Body Large: 1.125rem (Inter 400)
-- Body Standard: 1rem (Inter 400)
-- Caption/Meta: 0.875rem (Inter 500)
+- Body: 1rem (Inter 400)
+- Small/Meta: 0.875rem (Inter 500)
 
-**Line Heights**: 1.6 for body text, 1.2 for headings
+**Line Heights**: 1.7 for body, 1.1 for headings
 
 ---
 
 ## Layout System
 
-**Spacing Primitives** (Tailwind units):
-- Primary rhythm: 4, 8, 16, 24 (p-4, m-8, gap-16, py-24)
-- Section padding: py-16 md:py-24 lg:py-32
-- Component spacing: gap-8 md:gap-12
-- Micro-spacing: 2, 4 for tight elements
-
-**Container Strategy**:
-- Max-width: max-w-7xl for full sections
-- Content max-width: max-w-4xl for text-heavy areas
-- Grid system: 12-column responsive grid
-
-**Breakpoints**:
-- Mobile-first approach
-- sm: 640px, md: 768px, lg: 1024px, xl: 1280px
+**Spacing Primitives**: 4, 8, 12, 16 (p-4, gap-8, py-12, mb-16)
+- Section padding: py-16 md:py-24
+- Product grid gaps: gap-8 md:gap-12
+- Container: max-w-7xl
 
 ---
 
 ## Component Library
 
 ### Navigation
-**Desktop Header**:
-- Fixed position with subtle shadow on scroll
-- Logo (Omastalo main logo) left-aligned
-- Horizontal navigation: Home | About | Services | Events | Blog | Resources
-- Gold "Contact" CTA button right-aligned
-- Height: 80px with subtle backdrop blur
+**Desktop Header** (sticky, backdrop-blur):
+- Freshmo logo left, horizontal nav center: Shop | Benefits | Science | Reviews
+- Right: Search icon, Cart (with item count badge), Account icon
+- Height: 72px, turquoise underline on active/hover
 
-**Mobile Navigation**:
-- Hamburger menu (Heroicons icon)
-- Full-screen overlay menu with fade-in animation
-- Stacked navigation with generous tap targets (min 48px)
+**Mobile**: Hamburger menu, cart icon with badge, logo center
 
-### Hero Section (Home Page)
-**Layout**: Asymmetric two-column (60/40 split on desktop, stacked mobile)
-- Left: Professional headshot of Dr. Kgarimetsa (.webp, 800x1000px)
-- Right: Hero content with hierarchy:
-  - Small eyebrow text: "OMASTALO"
-  - Large heading: "Dr. Michael Kgarimetsa"
-  - Subheading: "Organization for Mathematics, Statistics & Life Orientation"
-  - Inspirational quote in italics
-  - CTA button group: "Book an Event" (primary gold) | "Learn More" (secondary outline)
-  
-**Background**: Clean white with subtle geometric pattern overlay (low opacity)
+### Hero Section
+**Layout**: Full-width turquoise background with white gradient overlay (top to bottom, opacity 0 → 0.15)
+- Large hero product image: Freshmo bottle floating with mint leaves (1920x1080px .webp)
+- Left-aligned content (max-w-xl):
+  - Eyebrow: "CLINICALLY PROVEN FRESH BREATH"
+  - Headline: "Your Best Breath Starts Here"
+  - Subtext: "Premium mouthwash with natural mint extracts"
+  - CTA buttons with backdrop-blur-md: "Shop Now" (white bg) | "Learn More" (white outline)
+- Height: 85vh desktop, auto mobile
 
-### Cards System
-**Event Cards**:
-- Elevated card (shadow-lg) with hover lift effect
-- Top: Event category badge
-- Large event title (Poppins 600)
-- Date/time with calendar icon (Heroicons)
-- Location with map pin icon
-- "Register" CTA button
-- 4px gold accent border on left edge
+### Product Cards
+**Grid**: 3 columns desktop, 2 tablet, 1 mobile
+- Square product image (800x800px .webp, white background)
+- Variant name badge (Peppermint/Spearmint/Strawberry Mint)
+- Product title + volume
+- 5-star rating + review count
+- Price (large, bold)
+- "Add to Cart" button (full-width, turquoise)
+- Quick view icon (top-right corner on hover)
 
-**Service Cards**:
-- Grid layout: 2 columns desktop, 1 column mobile
-- Icon area (80x80px circle with subtle navy background)
-- Service title
-- Brief description (2-3 lines)
-- "Learn More" link with arrow icon
+### Product Detail Page
+**Two-column split** (50/50 desktop):
+- Left: Large product image gallery (main image + 4 thumbnails), zoom on hover
+- Right: 
+  - Breadcrumb navigation
+  - Product name + variant selector (pill buttons)
+  - Star rating + review link
+  - Price (strikethrough original if on sale)
+  - Quantity selector (- / number / +)
+  - "Add to Cart" CTA (large, full-width)
+  - "Buy Now" secondary button
+  - Accordion sections: Description | Ingredients | Usage | Reviews
 
-**Blog Post Cards**:
-- Featured image (.webp, 16:9 ratio)
-- Category badge overlay
-- Post title (2-line clamp)
-- Author meta + read time
-- Excerpt (3-line clamp)
+### Benefits Section
+**3-column grid** with icons (from Heroicons):
+- Fresh Breath (sparkles icon)
+- Natural Ingredients (leaf icon)
+- Clinically Tested (shield-check icon)
+Each with icon, title, 2-line description
 
-### Forms
-**Contact Form**:
-- Full-width single column layout
-- Field hierarchy: Name | Email | Subject | Message (textarea)
-- Label above input with required asterisk
-- Input styling: Border-b-2 underline style (Material Design inspired)
-- Focus state: Gold border-b with subtle grow animation
-- Submit button: Full-width on mobile, auto-width on desktop
-- reCAPTCHA badge placement below form
-- Success/error message banners
+### Reviews Carousel
+**Horizontal scroll cards**:
+- 5-star rating
+- Review text (3-line clamp)
+- Customer name + verified badge
+- Photo testimonials where available
+- Navigation arrows + dots
 
-### Timeline Component (About Page)
-**Career Milestones**:
-- Vertical timeline with gold connecting line
-- Alternating left/right content on desktop
-- Year/date nodes as gold circles on timeline
-- Achievement cards with micro-elevation
-- Icon representation for milestone type
+### Shopping Cart (Slide-out Drawer)
+**Right-side overlay**:
+- Cart items list (image, name, quantity controls, price)
+- Subtotal calculation
+- "Checkout" button (sticky at bottom)
+- "Continue Shopping" link
 
 ---
 
-## Page-Specific Layouts
+## Page Structures
 
-### Home Page Structure
-1. **Hero Section** (80vh desktop, auto mobile) - Asymmetric with professional photo
-2. **Introduction Section** (py-24) - Centered max-w-3xl with mission statement
-3. **Services Preview** (py-24) - 3-column grid showcasing core services with icons
-4. **Upcoming Events** (py-24) - Horizontal scrolling event cards (3 visible, more scroll-able)
-5. **Featured Blog Posts** (py-24) - 2-column grid with large featured post + 2 secondary
-6. **Impact Numbers** (py-16) - 4-column stat display (students mentored, events hosted, etc.)
-7. **CTA Banner** (py-20) - Full-width with background image, "Get in Touch" primary CTA
+### Home Page (8 sections)
+1. Hero (product showcase with CTAs)
+2. Featured Products (3 variants in grid)
+3. Benefits (3-column icon grid)
+4. Science/Trust (2-column: clinical study image + text)
+5. Customer Reviews (carousel)
+6. Instagram Gallery (4x4 grid UGC photos)
+7. Subscription Offer (centered CTA banner with discount badge)
+8. FAQ Accordion (6 common questions)
 
-### About Page
-- Hero with timeline photo background (.webp optimized)
-- Biography section (2-column: portrait + text on desktop)
-- Interactive career timeline
-- Mission/Vision/Values grid (3 columns)
-- Professional affiliations section
+### Shop Page
+- Filter sidebar (desktop) / dropdown (mobile): Variant, Price, Rating
+- Product grid (12-24 items)
+- Sort dropdown: Featured, Price, Rating, Newest
+- Pagination
 
-### Services Page
-- Service category cards (2x2 grid desktop)
-- Each service gets dedicated section with:
-  - Icon header
-  - Detailed description
-  - Benefits list with checkmark icons
-  - "Book This Service" CTA
-- Future service (Marriage Officiation) shown as "Coming Soon" card with subtle styling
+### Product Detail Page
+- Breadcrumb navigation
+- Product showcase (images + details)
+- Related products slider (4 items)
+- Reviews section (expandable)
 
-### Events Page
-- Tabs: "Upcoming" | "Past"
-- Calendar view option toggle
-- Event cards in 2-column grid
-- Filter sidebar (desktop) / dropdown (mobile): Category, Date, Location
-
-### Blog Page
-- Featured post hero (full-width image with overlay text)
-- Category filter pills
-- 3-column masonry grid for posts
-- Load more button (not infinite scroll for accessibility)
-
-### Resources Page
-- Resource category cards
-- Download cards with file type icons, size indicator
-- Search bar prominent at top
-- Tag filtering system
-
-### Contact Page
-- 2-column split (60/40):
-  - Left: Contact form
-  - Right: Contact information card with icons, office hours, social links
-- Google Maps embed below (full-width, 400px height)
+### Checkout (Multi-step)
+**Progress bar**: Cart → Shipping → Payment → Confirmation
+- Single-column form (max-w-2xl centered)
+- Order summary sidebar (desktop) / sticky bottom (mobile)
+- Trust badges: Secure checkout, Free shipping, Money-back guarantee
 
 ---
 
 ## Images Strategy
 
-**Hero Images**:
-- Home: Professional portrait of Dr. Kgarimetsa (primary hero)
-- About: Academic setting photo (classroom, lecture hall)
-- Services: Stock image of mentorship/teaching
-- Events: Conference/seminar setting
-- Blog: Category-specific headers (mathematics, statistics, life orientation themes)
+**Hero Image**: Full-width Freshmo bottle on turquoise gradient with floating mint leaves, water droplets (1920x1080px, <150kb)
 
-**Stock Image Themes** (all .webp, optimized):
-- Education environments: modern classrooms, students engaged in learning
-- Professional settings: conferences, speaking engagements
-- Community: mentorship moments, group discussions
-- Academic materials: books, charts, educational tools
+**Product Photography** (All .webp, white background):
+- Main product shots: 1200x1200px, <100kb
+- Lifestyle shots: People using product, bathroom settings
+- Ingredient closeups: Mint leaves, natural elements
+- Before/after mouth health visuals
 
-**Image Specifications**:
-- Hero images: 1920x1080px, < 150kb
-- Card images: 800x600px, < 80kb
-- Thumbnails: 400x300px, < 40kb
-- All images: Lazy-loaded below fold
+**Supporting Images**:
+- Clinical study graphics (charts, diagrams)
+- Instagram UGC grid (800x800px each)
+- Testimonial customer photos
+- Ingredient transparency images
 
-**Omastalo Brand Logos**:
-- Main logo (color): Primary header usage
-- White logo: Dark backgrounds/footer
-- Black logo: Print/light backgrounds
-- All SVG format for scalability
+**Freshmo Logo**: SVG, turquoise version (header), white version (footer)
 
 ---
 
-## Footer Design
+## Footer
 
-**Structure** (3-row layout):
+**4-column grid** (stacked mobile), py-16:
+- Column 1: Logo, tagline, social icons
+- Column 2: Shop (variants, bundles, subscriptions)
+- Column 3: Company (About, Science, Contact, Careers)
+- Column 4: Support (FAQ, Shipping, Returns, Reviews)
 
-**Row 1** - Brand & Links (py-12):
-- 4-column grid desktop, stacked mobile
-- Column 1: Omastalo logo + tagline
-- Column 2: Quick Links (Home, About, Services, etc.)
-- Column 3: Resources & Blog links
-- Column 4: Contact information with icons
-
-**Row 2** - Lekker Network (py-8, border-t border-opacity-10):
-- Centered content
-- Lekker Network logo (centered, 120px width)
-- "Powered by Lekker Network" text below logo
-- Level 1 Verified Badge (100px, clickable to verification page)
-
-**Row 3** - Legal (py-6, border-t border-opacity-10):
-- Copyright: "© 2025 OMASTALO — Organization for Mathematics, Statistics & Life Orientation"
-- Legal links: Privacy Policy | Terms of Service (inline, separated by vertical bars)
+**Bottom bar** (py-6, border-t):
+- Copyright left, Legal links right (Privacy, Terms, Accessibility)
 
 ---
 
 ## Iconography
-
-**Icon Library**: Heroicons (outline style for primary, solid for emphasis)
-
-**Common Icons**:
-- Navigation: menu, close, chevron-down
-- Services: academic-cap, calculator, chart-bar, light-bulb
-- Contact: envelope, phone, map-pin, calendar
-- Social: twitter, linkedin, facebook (as needed)
-- UI: arrow-right, check-circle, information-circle
+**Heroicons** (outline primary, solid accents):
+- Commerce: shopping-cart, heart, search, user
+- Product: sparkles, leaf, shield-check, star
+- UI: chevron-right, plus, minus, close, menu
 
 ---
 
 ## Responsive Behavior
-
-**Mobile-First Adaptations**:
-- Stack all multi-column layouts to single column
-- Increase touch target sizes (min 48x48px)
-- Simplify navigation to hamburger menu
-- Full-width CTAs for better thumb reach
-- Reduce vertical spacing by 33% on mobile
-- Hero heights: auto instead of fixed viewport
-- Horizontal scrolling for event/blog previews
-
-**Tablet Considerations**:
-- 2-column layouts where desktop shows 3-4
-- Maintain desktop navigation if space permits
-- Balanced spacing between mobile and desktop values
+- Stack all grids to single column on mobile
+- Product images: Full-width mobile, contained desktop
+- Navigation: Collapse to hamburger <768px
+- Cart drawer: Full-screen mobile, 400px wide desktop
+- Touch targets: min 48px height
+- Horizontal product scrolling on mobile for featured sections
 
 ---
 
 ## Accessibility
-
-- WCAG 2.1 AA compliance minimum
-- Color contrast ratio: 4.5:1 for body text, 3:1 for large text
-- Focus indicators: 2px gold outline with 2px offset
-- Skip navigation link (visually hidden, keyboard accessible)
-- Semantic HTML5 structure
-- ARIA labels for icon-only buttons
-- Form field error messaging (visible + ARIA announcements)
-- Keyboard navigation: Full site navigable via keyboard
-- Alt text: Descriptive for all images
+- WCAG 2.1 AA compliance
+- Alt text for all product images (descriptive: "Freshmo Peppermint Mouthwash bottle with mint leaves")
+- Focus indicators: 2px turquoise outline
+- Form labels always visible
+- Cart item count announced to screen readers
+- Keyboard navigation throughout checkout
 
 ---
 
-## Performance Optimizations
-
-- Critical CSS inline for above-fold content
-- Lazy-load all images below fold
-- Font-display: swap for web fonts
-- Defer non-critical JavaScript
-- Compress .webp images: Hero <150kb, Cards <80kb
-- Enable browser caching headers
-- Minimize DOM depth (max 10 levels)
-- Use CSS Grid/Flexbox over JavaScript layouts
+## Performance
+- Lazy-load product images below fold
+- WebP format all images
+- Critical CSS inline
+- Defer non-essential scripts
+- Product image CDN optimization
+- Cache product catalog data
