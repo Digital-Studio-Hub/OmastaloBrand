@@ -13,11 +13,11 @@ import {
   BookOpen,
   TrendingUp,
 } from "lucide-react";
-import heroImage from "@assets/gallery-graduation-achievement-16.jpg";
+import heroImage from "@assets/Hero Section Image_1763537740394.jpg";
 import conferenceImage from "@assets/stock_images/academic_conference__c73df436.jpg";
 import studentsImage from "@assets/stock_images/university_students__a3823dac.jpg";
 import mentorshipImage from "@assets/stock_images/professional_mentors_d11d97f7.jpg";
-import researchImage from "@assets/gallery-speaker-presentation-03.jpg";
+import leadingOrgImage from "@assets/A Leading Community Development Organisation Image_1763537740394.jpg";
 import celebrationImage from "@assets/gallery-group-celebration-14.jpg";
 
 export default function Home() {
@@ -65,7 +65,7 @@ export default function Home() {
       title: "Empowering Communities Through Service",
       category: "Community Impact",
       excerpt: "Insights from Dr. Kgarimetsa on building stronger communities through dedicated public service and transformative programmes.",
-      image: researchImage,
+      image: leadingOrgImage,
     },
     {
       title: "Celebrating Community Transformation",
@@ -130,7 +130,7 @@ export default function Home() {
             <div className="order-1 lg:order-2">
               <img
                 src={heroImage}
-                alt="Dr. Michael Kgarimetsa - Doctorate Graduation Achievement"
+                alt="Dr. Michael Kgarimetsa - Doctor of Business Administration Graduate"
                 className="rounded-lg shadow-2xl w-full h-auto"
                 loading="eager"
               />
@@ -144,8 +144,8 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src={researchImage}
-                alt="Dr. Kgarimetsa presenting research"
+                src={leadingOrgImage}
+                alt="Dr. Kgarimetsa - Community Development Leader"
                 className="rounded-lg shadow-xl w-full h-auto"
                 loading="lazy"
               />
