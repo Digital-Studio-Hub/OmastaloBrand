@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
+import { Download } from "lucide-react";
 
 // Graduation Celebration Images
 import gallery01 from "@assets/gallery-graduation-family-01.jpg";
@@ -27,6 +28,13 @@ import gallery19 from "@assets/gallery-platform-celebration-19.jpg";
 import gallery20 from "@assets/gallery-graduation-banner-20.jpg";
 
 export default function Gallery() {
+  const handleDownload = (imageUrl: string, fileName: string) => {
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = fileName;
+    link.click();
+  };
+
   const galleryItems = [
     {
       image: gallery01,
@@ -192,6 +200,16 @@ export default function Gallery() {
                   <Badge className="absolute top-4 left-4 shadow-md" data-testid={`badge-category-${index}`}>
                     {item.category}
                   </Badge>
+                  <Button
+                    onClick={() => handleDownload(item.image, `${item.title.replace(/\s+/g, '-').toLowerCase()}.jpg`)}
+                    size="icon"
+                    variant="ghost"
+                    className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-white shadow-md"
+                    aria-label={`Download ${item.title}`}
+                    data-testid={`button-download-${index}`}
+                  >
+                    <Download className="w-5 h-5" />
+                  </Button>
                 </div>
                 <div className="p-6">
                   <h3 className="font-heading font-semibold text-lg mb-2" data-testid={`text-title-${index}`}>

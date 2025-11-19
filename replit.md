@@ -35,15 +35,22 @@ Preferred communication style: Simple, everyday language.
 - Shared Header and Footer components across all pages
 - SEO component for dynamic meta tag management
 
-**Gallery Page (November 2025):**
-- Displays 12 stock images featuring academic seminars, workshops, and mentorship sessions
+**Gallery Page (November 2025 - Updated):**
+- Displays 20 authentic graduation photos from Dr. Kgarimetsa's DBA ceremony (October 18, 2025)
 - Responsive 3-column grid (1 column mobile, 2 tablet, 3 desktop)
-- Each gallery card includes: high-quality image, category badge, title, description
+- Each gallery card includes: high-quality image, category badge, download button, title, description
+- **Download Functionality (New):** 
+  - Download button in top-right corner of each image using shadcn Button component
+  - Semi-transparent background (bg-black/40) with backdrop blur
+  - Native browser download via programmatically created anchor element
+  - Keyboard accessible (Tab navigation, Enter/Space to download)
+  - Proper ARIA labels for screen readers
+  - Built-in Button hover elevation (subtle visual feedback following design guidelines)
 - Hover effects: image scale animation, gradient overlay, card elevation
 - Lazy-loaded images for performance optimization
 - CTA section with links to Events and Contact pages
 - Follows Material Design principles with proper spacing and typography
-- Stock images stored in attached_assets/stock_images/
+- Gallery images stored in attached_assets/gallery-*.jpg
 
 **Design System:**
 - Material Design principles adapted for academic credibility
