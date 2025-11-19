@@ -204,7 +204,7 @@ export default function Gallery() {
                     onClick={() => handleDownload(item.image, `${item.title.replace(/\s+/g, '-').toLowerCase()}.jpg`)}
                     size="icon"
                     variant="ghost"
-                    className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-white shadow-md"
+                    className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-white hover:bg-primary hover:text-white shadow-md transition-colors duration-300"
                     aria-label={`Download ${item.title}`}
                     data-testid={`button-download-${index}`}
                   >
