@@ -200,16 +200,18 @@ export default function Gallery() {
                   <Badge className="absolute top-4 left-4 shadow-md" data-testid={`badge-category-${index}`}>
                     {item.category}
                   </Badge>
-                  <Button
-                    onClick={() => handleDownload(item.image, `${item.title.replace(/\s+/g, '-').toLowerCase()}.jpg`)}
-                    size="icon"
-                    variant="ghost"
-                    className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-white hover:bg-primary hover:text-white shadow-md transition-colors duration-300"
-                    aria-label={`Download ${item.title}`}
-                    data-testid={`button-download-${index}`}
-                  >
-                    <Download className="w-5 h-5" />
-                  </Button>
+                  <div className="absolute top-4 right-4 z-10">
+                    <Button
+                      onClick={() => handleDownload(item.image, `${item.title.replace(/\s+/g, '-').toLowerCase()}.jpg`)}
+                      size="icon"
+                      variant="ghost"
+                      className="bg-black/40 backdrop-blur-sm text-white hover:bg-primary hover:text-white shadow-md transition-colors duration-300"
+                      aria-label={`Download ${item.title}`}
+                      data-testid={`button-download-${index}`}
+                    >
+                      <Download className="w-5 h-5" />
+                    </Button>
+                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="font-heading font-semibold text-lg mb-2" data-testid={`text-title-${index}`}>
