@@ -1,8 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import { Award, BookOpen, Users, Target } from "lucide-react";
-import professorImage from "@assets/gallery-graduation-family-pride-18.jpg";
-import classroomImage from "@assets/gallery-speaker-presentation-03.jpg";
+import ownerImage from "@assets/Owner_1764666236223.jpg";
 
 export default function About() {
   const milestones = [
@@ -62,7 +61,7 @@ export default function About() {
       <section
         className="relative py-24 bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)), url(${classroomImage})`,
+          backgroundImage: `linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)), url(${ownerImage})`,
         }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
@@ -80,7 +79,7 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src={professorImage}
+                src={ownerImage}
                 alt="Dr. Michael Kgarimetsa"
                 className="rounded-lg shadow-xl w-full"
                 loading="lazy"
