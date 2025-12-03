@@ -55,6 +55,7 @@ async function sendEmailWithRetry(
     const response = await fetch("https://api.zeptomail.com/v1.1/email", {
       method: "POST",
       headers: {
+        "Accept": "application/json",
         "Content-Type": "application/json",
         "Authorization": `Zoho-enczapikey ${ZEPTO_API_KEY}`,
       },

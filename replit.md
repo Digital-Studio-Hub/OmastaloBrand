@@ -91,8 +91,13 @@ Preferred communication style: Simple, everyday language.
   - `POST /api/events`: Create new event (admin only)
   - `PATCH /api/events/:id`: Update event (admin only)
   - `DELETE /api/events/:id`: Delete event (admin only)
-- **RSVPs:**
-  - `POST /api/rsvps`: Submit event registration (public, sends ZeptoMail confirmation)
+- **RSVPs (Enhanced December 2025):**
+  - `POST /api/rsvps`: Submit event registration with enhanced features:
+    - Generates unique registration reference (format: OMT-XXXXXXXX-XXXX)
+    - Sends dual confirmation emails (registrant + info@omastalo.co.za)
+    - Includes retry logic (3 attempts with exponential backoff)
+    - Logs all email attempts to email_logs table for audit
+    - Returns structured response with success/failure status and registration ref
 - **Blog:**
   - `GET /api/blog`: Fetch all published blog posts (public)
   - `POST /api/blog`: Create blog post (admin only)
@@ -114,13 +119,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Database Design
 
-**PostgreSQL Database Schema (November 2025):**
+**PostgreSQL Database Schema (December 2025):**
 - **users**: Admin authentication with bcrypt-hashed passwords (id, email, username, password, isAdmin)
 - **blog_posts**: CMS blog content with categories, tags, and publish workflow (id, title, slug, content, excerpt, author, category, tags, status, publishedAt)
 - **events**: Educational workshops with dates, locations, capacity (id, title, description, startTime, endTime, location, capacity, imageUrl)
-- **rsvps**: Event registration tracking linked to events (id, eventId, name, email, phone, attendees, message)
+- **rsvps**: Event registration tracking linked to events (id, eventId, name, email, phone, attendees, message, registrationRef, status, createdAt)
+- **email_logs**: Email delivery audit trail (id, rsvpId, recipientEmail, emailType, subject, status, attempts, lastAttemptAt, sentAt, errorMessage, createdAt)
 - **resources**: Downloadable files with metadata (id, title, description, category, fileUrl, fileName, fileSize)
-- **downloads**: Download tracking analytics (id, resourceId, downloadedAt, ipAddress)
 - **testimonials**: Client testimonials (id, name, role, organization, content, rating, imageUrl)
 - **sessions**: Session storage for connect-pg-simple (sid, sess, expire)
 

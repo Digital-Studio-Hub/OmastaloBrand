@@ -462,6 +462,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const adminResponse = await fetch("https://api.zeptomail.com/v1.1/email", {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json",
           "Authorization": `Zoho-enczapikey ${ZEPTO_API_KEY}`,
         },
@@ -477,6 +478,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const userResponse = await fetch("https://api.zeptomail.com/v1.1/email", {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json",
           "Authorization": `Zoho-enczapikey ${ZEPTO_API_KEY}`,
         },
