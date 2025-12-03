@@ -463,7 +463,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: ZEPTO_API_KEY,
+          "Authorization": `Zoho-enczapikey ${ZEPTO_API_KEY}`,
         },
         body: JSON.stringify(adminEmailPayload),
       });
@@ -478,7 +478,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: ZEPTO_API_KEY,
+          "Authorization": `Zoho-enczapikey ${ZEPTO_API_KEY}`,
         },
         body: JSON.stringify(userConfirmationPayload),
       });

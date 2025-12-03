@@ -49,14 +49,20 @@ async function sendEmailWithRetry(
       lastAttemptAt: new Date(),
     });
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    
     const response = await fetch("https://api.zeptomail.com/v1.1/email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: ZEPTO_API_KEY,
+        "Authorization": `Zoho-enczapikey ${ZEPTO_API_KEY}`,
       },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     });
+    
+    clearTimeout(timeoutId);
 
     if (response.ok) {
       console.log(`[EMAIL] Successfully sent to: ${payload.to[0].email_address.address}`);
