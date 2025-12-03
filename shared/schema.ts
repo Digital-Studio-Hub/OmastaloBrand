@@ -59,7 +59,23 @@ export const rsvps = pgTable("rsvps", {
   email: varchar("email", { length: 255 }).notNull(),
   phone: varchar("phone", { length: 50 }),
   attendees: integer("attendees").default(1).notNull(),
+  message: text("message"),
+  registrationRef: varchar("registration_ref", { length: 50 }).notNull(),
   status: varchar("status", { length: 20 }).default("confirmed").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const emailLogs = pgTable("email_logs", {
+  id: serial("id").primaryKey(),
+  rsvpId: integer("rsvp_id").references(() => rsvps.id, { onDelete: "cascade" }),
+  recipientEmail: varchar("recipient_email", { length: 255 }).notNull(),
+  emailType: varchar("email_type", { length: 50 }).notNull(),
+  subject: varchar("subject", { length: 500 }).notNull(),
+  status: varchar("status", { length: 20 }).default("pending").notNull(),
+  attempts: integer("attempts").default(0).notNull(),
+  lastAttemptAt: timestamp("last_attempt_at"),
+  sentAt: timestamp("sent_at"),
+  errorMessage: text("error_message"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -122,9 +138,17 @@ export type Event = typeof events.$inferSelect;
 export const insertRsvpSchema = createInsertSchema(rsvps).omit({
   id: true,
   createdAt: true,
+  registrationRef: true,
 });
 export type InsertRsvp = z.infer<typeof insertRsvpSchema>;
 export type Rsvp = typeof rsvps.$inferSelect;
+
+export const insertEmailLogSchema = createInsertSchema(emailLogs).omit({
+  id: true,
+  createdAt: true,
+});
+export type InsertEmailLog = z.infer<typeof insertEmailLogSchema>;
+export type EmailLog = typeof emailLogs.$inferSelect;
 
 export const insertResourceSchema = createInsertSchema(resources).omit({
   id: true,

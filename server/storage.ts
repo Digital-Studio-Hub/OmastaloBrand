@@ -8,6 +8,7 @@ import {
   resources,
   testimonials,
   gallery,
+  emailLogs,
   type User,
   type InsertUser,
   type BlogPost,
@@ -22,6 +23,8 @@ import {
   type InsertTestimonial,
   type Gallery,
   type InsertGallery,
+  type EmailLog,
+  type InsertEmailLog,
 } from "@shared/schema";
 
 export interface IStorage {
@@ -45,7 +48,12 @@ export interface IStorage {
   deleteEvent(id: number): Promise<boolean>;
   
   getRsvpsByEvent(eventId: number): Promise<Rsvp[]>;
-  createRsvp(rsvp: InsertRsvp): Promise<Rsvp>;
+  createRsvp(rsvp: InsertRsvp & { registrationRef: string }): Promise<Rsvp>;
+  
+  createEmailLog(log: InsertEmailLog): Promise<EmailLog>;
+  updateEmailLog(id: number, data: Partial<InsertEmailLog>): Promise<EmailLog | undefined>;
+  getEmailLogsByRsvp(rsvpId: number): Promise<EmailLog[]>;
+  getPendingEmailLogs(): Promise<EmailLog[]>;
   
   getAllResources(category?: string): Promise<Resource[]>;
   getResource(id: number): Promise<Resource | undefined>;
@@ -153,9 +161,27 @@ export class DbStorage implements IStorage {
     return await db.select().from(rsvps).where(eq(rsvps.eventId, eventId));
   }
 
-  async createRsvp(rsvp: InsertRsvp): Promise<Rsvp> {
+  async createRsvp(rsvp: InsertRsvp & { registrationRef: string }): Promise<Rsvp> {
     const [created] = await db.insert(rsvps).values(rsvp).returning();
     return created;
+  }
+
+  async createEmailLog(log: InsertEmailLog): Promise<EmailLog> {
+    const [created] = await db.insert(emailLogs).values(log).returning();
+    return created;
+  }
+
+  async updateEmailLog(id: number, data: Partial<InsertEmailLog>): Promise<EmailLog | undefined> {
+    const [updated] = await db.update(emailLogs).set(data).where(eq(emailLogs.id, id)).returning();
+    return updated;
+  }
+
+  async getEmailLogsByRsvp(rsvpId: number): Promise<EmailLog[]> {
+    return await db.select().from(emailLogs).where(eq(emailLogs.rsvpId, rsvpId));
+  }
+
+  async getPendingEmailLogs(): Promise<EmailLog[]> {
+    return await db.select().from(emailLogs).where(eq(emailLogs.status, "pending"));
   }
 
   async getAllResources(category?: string): Promise<Resource[]> {
