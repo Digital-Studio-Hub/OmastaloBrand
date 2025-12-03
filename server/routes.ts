@@ -5,6 +5,7 @@ import { contactFormSchema, insertBlogPostSchema, insertEventSchema, insertRsvpS
 import { z } from "zod";
 import { setupAuth, isAuthenticated, isAdmin } from "./auth";
 import { storage } from "./storage";
+import { sendRegistrationEmails, generateRegistrationRef } from "./email-service";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   setupAuth(app);
@@ -254,80 +255,104 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   app.post("/api/rsvps", async (req, res) => {
+    const startTime = Date.now();
+    const registrationRef = generateRegistrationRef();
+    
+    console.log(`[REGISTRATION] New registration attempt started - Ref: ${registrationRef}`);
+    
     try {
       const data = insertRsvpSchema.parse(req.body);
       
+      console.log(`[REGISTRATION] ${registrationRef} - Validating event ID: ${data.eventId}`);
+      
       const event = await storage.getEvent(data.eventId);
       if (!event) {
-        return res.status(404).json({ error: "Event not found" });
+        console.log(`[REGISTRATION] ${registrationRef} - Event not found: ${data.eventId}`);
+        return res.status(404).json({ 
+          success: false,
+          error: "Event not found",
+          message: "The event you're trying to register for doesn't exist or is no longer available."
+        });
       }
       
-      const rsvp = await storage.createRsvp(data);
+      console.log(`[REGISTRATION] ${registrationRef} - Saving registration for: ${data.name} (${data.email})`);
       
-      const ZEPTO_API_KEY = process.env.ZEPTOMAIL_API_KEY;
-      const ZEPTO_FROM_EMAIL = process.env.ZEPTOMAIL_FROM_EMAIL;
+      const rsvp = await storage.createRsvp({
+        ...data,
+        registrationRef,
+      });
       
-      if (ZEPTO_API_KEY && ZEPTO_FROM_EMAIL) {
-        const confirmationEmail = {
-          from: { address: ZEPTO_FROM_EMAIL },
-          to: [{ email_address: { address: data.email } }],
-          subject: `RSVP Confirmation: ${event.title}`,
-          htmlbody: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <div style="background-color: #0D1B2A; color: white; padding: 30px; text-align: center;">
-                <h1 style="margin: 0; font-size: 28px;">OMASTALO</h1>
-                <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">
-                  Organization for Mathematics, Statistics & Life Orientation
-                </p>
-              </div>
-              <div style="padding: 30px; background-color: #fff;">
-                <h2 style="color: #0D1B2A; margin-top: 0;">Hello ${data.name},</h2>
-                <p style="color: #333; line-height: 1.6;">
-                  Thank you for registering for <strong>${event.title}</strong>!
-                </p>
-                <div style="background-color: #f9f9f9; border-left: 4px solid #C9A227; padding: 15px; margin: 20px 0;">
-                  <h3 style="margin-top: 0; color: #0D1B2A; font-size: 16px;">Event Details:</h3>
-                  <p style="margin: 5px 0;"><strong>Date:</strong> ${new Date(event.eventDate).toLocaleDateString('en-ZA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                  <p style="margin: 5px 0;"><strong>Time:</strong> ${new Date(event.eventDate).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' })}</p>
-                  <p style="margin: 5px 0;"><strong>Location:</strong> ${event.location}</p>
-                  <p style="margin: 5px 0;"><strong>Attendees:</strong> ${data.attendees} person(s)</p>
-                </div>
-                <p style="color: #333; line-height: 1.6;">
-                  We look forward to seeing you there! If you have any questions, please contact us.
-                </p>
-              </div>
-              <div style="background-color: #f5f5f5; padding: 20px; text-align: center;">
-                <p style="margin: 0; color: #666; font-size: 14px;">
-                  <strong>Contact Information</strong><br>
-                  Email: info@omastalo.co.za<br>
-                  Website: www.omastalo.co.za
-                </p>
-                <p style="margin: 15px 0 0 0; color: #999; font-size: 12px;">
-                  © 2025 OMASTALO. All rights reserved.
-                </p>
-              </div>
-            </div>
-          `,
-        };
-        
-        await fetch("https://api.zeptomail.com/v1.1/email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: ZEPTO_API_KEY,
+      console.log(`[REGISTRATION] ${registrationRef} - Registration saved successfully, ID: ${rsvp.id}`);
+      
+      console.log(`[REGISTRATION] ${registrationRef} - Sending confirmation emails...`);
+      const emailResult = await sendRegistrationEmails(rsvp, event);
+      
+      const processingTime = Date.now() - startTime;
+      console.log(`[REGISTRATION] ${registrationRef} - Completed in ${processingTime}ms`);
+      
+      if (!emailResult.registrantEmailSent && !emailResult.ownerEmailSent) {
+        console.warn(`[REGISTRATION] ${registrationRef} - All emails failed to send`);
+        return res.status(201).json({
+          success: true,
+          message: "Registration saved successfully. We couldn't send the confirmation email, but your registration is confirmed.",
+          registrationRef: rsvp.registrationRef,
+          rsvp: {
+            id: rsvp.id,
+            name: rsvp.name,
+            email: rsvp.email,
+            attendees: rsvp.attendees,
+            eventTitle: event.title,
+            eventDate: event.eventDate,
+            location: event.location,
           },
-          body: JSON.stringify(confirmationEmail),
-        }).catch(err => console.error("Failed to send RSVP confirmation email:", err));
+          emailStatus: {
+            registrantEmailSent: false,
+            ownerEmailSent: false,
+            note: "Confirmation email delivery failed. Please contact info@omastalo.co.za if you don't receive it.",
+          }
+        });
       }
       
-      res.json(rsvp);
+      res.status(201).json({
+        success: true,
+        message: "Registration confirmed! A confirmation email has been sent to your email address.",
+        registrationRef: rsvp.registrationRef,
+        rsvp: {
+          id: rsvp.id,
+          name: rsvp.name,
+          email: rsvp.email,
+          attendees: rsvp.attendees,
+          eventTitle: event.title,
+          eventDate: event.eventDate,
+          location: event.location,
+        },
+        emailStatus: {
+          registrantEmailSent: emailResult.registrantEmailSent,
+          ownerEmailSent: emailResult.ownerEmailSent,
+        }
+      });
+      
     } catch (error) {
-      console.error("Error creating RSVP:", error);
+      const processingTime = Date.now() - startTime;
+      console.error(`[REGISTRATION] ${registrationRef} - Failed after ${processingTime}ms:`, error);
+      
       if (error instanceof z.ZodError) {
-        res.status(400).json({ error: "Invalid RSVP data", details: error.errors });
-      } else {
-        res.status(500).json({ error: "Failed to create RSVP" });
+        return res.status(400).json({ 
+          success: false,
+          error: "Invalid registration data",
+          message: "Please check your form entries and try again.",
+          details: error.errors.map(e => ({
+            field: e.path.join('.'),
+            message: e.message
+          }))
+        });
       }
+      
+      res.status(500).json({ 
+        success: false,
+        error: "Registration failed",
+        message: "We couldn't process your registration. Please try again or contact info@omastalo.co.za for assistance."
+      });
     }
   });
 

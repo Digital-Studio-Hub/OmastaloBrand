@@ -19,8 +19,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Loader2, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2, Copy, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import type { Event } from "@shared/schema";
@@ -31,9 +32,30 @@ const rsvpFormSchema = z.object({
   email: z.string().email("Please enter a valid email"),
   phone: z.string().optional(),
   attendees: z.number().min(1).max(10),
+  message: z.string().optional(),
 });
 
 type RSVPFormData = z.infer<typeof rsvpFormSchema>;
+
+interface RegistrationResponse {
+  success: boolean;
+  message: string;
+  registrationRef: string;
+  rsvp: {
+    id: number;
+    name: string;
+    email: string;
+    attendees: number;
+    eventTitle: string;
+    eventDate: string;
+    location: string;
+  };
+  emailStatus: {
+    registrantEmailSent: boolean;
+    ownerEmailSent: boolean;
+    note?: string;
+  };
+}
 
 interface RSVPDialogProps {
   event: Event | null;
@@ -43,6 +65,8 @@ interface RSVPDialogProps {
 
 export function RSVPDialog({ event, open, onOpenChange }: RSVPDialogProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [registrationData, setRegistrationData] = useState<RegistrationResponse | null>(null);
+  const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<RSVPFormData>({
@@ -52,25 +76,33 @@ export function RSVPDialog({ event, open, onOpenChange }: RSVPDialogProps) {
       email: "",
       phone: "",
       attendees: 1,
+      message: "",
     },
   });
 
   const rsvpMutation = useMutation({
-    mutationFn: async (data: RSVPFormData & { eventId: number }) => {
+    mutationFn: async (data: RSVPFormData & { eventId: number }): Promise<RegistrationResponse> => {
       const res = await apiRequest("POST", "/api/rsvps", data);
-      return await res.json();
+      const result = await res.json();
+      if (!result.success) {
+        throw new Error(result.message || "Registration failed");
+      }
+      return result;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setRegistrationData(data);
       setSubmitted(true);
       toast({
-        title: "RSVP Confirmed!",
-        description: "Check your email for confirmation details.",
+        title: "Registration Confirmed!",
+        description: data.emailStatus.registrantEmailSent 
+          ? "A confirmation email has been sent to your inbox."
+          : "Your registration is confirmed. Please save your reference number.",
       });
       form.reset();
     },
     onError: (error: Error) => {
       toast({
-        title: "RSVP Failed",
+        title: "Registration Failed",
         description: error.message || "Please try again later.",
         variant: "destructive",
       });
@@ -87,8 +119,18 @@ export function RSVPDialog({ event, open, onOpenChange }: RSVPDialogProps) {
 
   const handleClose = () => {
     setSubmitted(false);
+    setRegistrationData(null);
+    setCopied(false);
     form.reset();
     onOpenChange(false);
+  };
+
+  const copyRegistrationRef = () => {
+    if (registrationData?.registrationRef) {
+      navigator.clipboard.writeText(registrationData.registrationRef);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   if (!event) return null;
@@ -103,15 +145,45 @@ export function RSVPDialog({ event, open, onOpenChange }: RSVPDialogProps) {
           </DialogDescription>
         </DialogHeader>
 
-        {submitted ? (
+        {submitted && registrationData ? (
           <div className="py-6 text-center">
             <div className="mb-4 flex justify-center">
               <CheckCircle2 className="h-16 w-16 text-primary" />
             </div>
             <h3 className="font-heading font-semibold text-xl mb-2">Registration Confirmed!</h3>
-            <p className="text-muted-foreground mb-6">
-              A confirmation email has been sent to your inbox with event details.
+            
+            <div className="my-6 p-4 bg-muted rounded-lg border-2 border-primary/20">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Your Registration Reference</p>
+              <div className="flex items-center justify-center gap-2">
+                <span className="font-mono text-lg font-bold text-primary" data-testid="text-registration-ref">
+                  {registrationData.registrationRef}
+                </span>
+                <Button 
+                  size="icon" 
+                  variant="ghost" 
+                  onClick={copyRegistrationRef}
+                  className="h-8 w-8"
+                  data-testid="button-copy-ref"
+                >
+                  {copied ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+
+            <p className="text-muted-foreground text-sm mb-2">
+              {registrationData.emailStatus.registrantEmailSent 
+                ? "A confirmation email has been sent to your inbox with all event details."
+                : "Please save your registration reference. If you don't receive a confirmation email, contact info@omastalo.co.za."}
             </p>
+            
+            <div className="text-left bg-muted/50 rounded-md p-3 my-4 text-sm">
+              <p className="font-medium mb-1">{registrationData.rsvp.eventTitle}</p>
+              <p className="text-muted-foreground">
+                {format(new Date(registrationData.rsvp.eventDate), "EEEE, MMMM d, yyyy 'at' h:mm a")}
+              </p>
+              <p className="text-muted-foreground">{registrationData.rsvp.location}</p>
+            </div>
+
             <Button onClick={handleClose} className="w-full" data-testid="button-close-rsvp">
               Close
             </Button>
@@ -189,6 +261,26 @@ export function RSVPDialog({ event, open, onOpenChange }: RSVPDialogProps) {
                         {...field}
                         onChange={(e) => field.onChange(parseInt(e.target.value) || 1)}
                         data-testid="input-rsvp-attendees"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Special Requests (Optional)</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Any dietary requirements, accessibility needs, or special requests..."
+                        className="resize-none"
+                        rows={3}
+                        {...field}
+                        data-testid="input-rsvp-message"
                       />
                     </FormControl>
                     <FormMessage />
