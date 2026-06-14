@@ -1,16 +1,19 @@
 import { storage } from "./storage";
 import type { Event, Rsvp, EmailLog } from "@shared/schema";
+import { Inbound } from "inboundemail";
 
 const MAX_RETRIES = 3;
 const INITIAL_DELAY_MS = 1000;
 const OWNER_EMAIL = "info@omastalo.co.za";
+const FROM_EMAIL = "Cledwyn from Lekker Network <cledwyn@lekker.network>";
 
-interface EmailPayload {
-  from: { address: string };
-  to: { email_address: { address: string } }[];
-  subject: string;
-  htmlbody: string;
+const apiKey = process.env.INBOUND_API_KEY || "";
+
+if (!apiKey) {
+  console.warn("INBOUND_API_KEY not found — emails will not be sent");
 }
+
+const client = apiKey ? new Inbound(apiKey) : null;
 
 function generateRegistrationRef(): string {
   const timestamp = Date.now().toString(36).toUpperCase();
@@ -23,14 +26,14 @@ function sleep(ms: number): Promise<void> {
 }
 
 async function sendEmailWithRetry(
-  payload: EmailPayload,
+  toEmail: string,
+  subject: string,
+  htmlContent: string,
   emailLogId: number,
   attempt: number = 1
 ): Promise<{ success: boolean; error?: string }> {
-  const ZEPTO_API_KEY = process.env.ZEPTOMAIL_API_KEY;
-  
-  if (!ZEPTO_API_KEY) {
-    const error = "ZeptoMail API key not configured";
+  if (!client) {
+    const error = "Inbound API not configured";
     console.error(`[EMAIL] ${error}`);
     await storage.updateEmailLog(emailLogId, {
       status: "failed",
@@ -42,57 +45,28 @@ async function sendEmailWithRetry(
   }
 
   try {
-    console.log(`[EMAIL] Attempt ${attempt}/${MAX_RETRIES} sending to: ${payload.to[0].email_address.address}`);
+    console.log(`[EMAIL] Attempt ${attempt}/${MAX_RETRIES} sending to: ${toEmail}`);
     
     await storage.updateEmailLog(emailLogId, {
       attempts: attempt,
       lastAttemptAt: new Date(),
     });
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000);
-    
-    const response = await fetch("https://api.zeptomail.com/v1.1/email", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": `Zoho-enczapikey ${ZEPTO_API_KEY}`,
-      },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
+    await client.emails.send({
+      from: FROM_EMAIL,
+      to: toEmail,
+      subject: subject,
+      html: htmlContent,
     });
-    
-    clearTimeout(timeoutId);
 
-    if (response.ok) {
-      console.log(`[EMAIL] Successfully sent to: ${payload.to[0].email_address.address}`);
-      await storage.updateEmailLog(emailLogId, {
-        status: "sent",
-        sentAt: new Date(),
-        attempts: attempt,
-        lastAttemptAt: new Date(),
-      });
-      return { success: true };
-    }
-
-    const errorText = await response.text();
-    console.error(`[EMAIL] Failed (status ${response.status}): ${errorText}`);
-
-    if (attempt < MAX_RETRIES) {
-      const delayMs = INITIAL_DELAY_MS * Math.pow(2, attempt - 1);
-      console.log(`[EMAIL] Retrying in ${delayMs}ms...`);
-      await sleep(delayMs);
-      return sendEmailWithRetry(payload, emailLogId, attempt + 1);
-    }
-
+    console.log(`[EMAIL] Successfully sent to: ${toEmail}`);
     await storage.updateEmailLog(emailLogId, {
-      status: "failed",
-      errorMessage: `HTTP ${response.status}: ${errorText}`,
+      status: "sent",
+      sentAt: new Date(),
       attempts: attempt,
       lastAttemptAt: new Date(),
     });
-    return { success: false, error: errorText };
+    return { success: true };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     console.error(`[EMAIL] Error: ${errorMessage}`);
@@ -101,7 +75,7 @@ async function sendEmailWithRetry(
       const delayMs = INITIAL_DELAY_MS * Math.pow(2, attempt - 1);
       console.log(`[EMAIL] Retrying in ${delayMs}ms...`);
       await sleep(delayMs);
-      return sendEmailWithRetry(payload, emailLogId, attempt + 1);
+      return sendEmailWithRetry(toEmail, subject, htmlContent, emailLogId, attempt + 1);
     }
 
     await storage.updateEmailLog(emailLogId, {
@@ -340,15 +314,14 @@ export async function sendRegistrationEmails(
   rsvp: Rsvp,
   event: Event
 ): Promise<SendRegistrationEmailsResult> {
-  const ZEPTO_FROM_EMAIL = process.env.ZEPTOMAIL_FROM_EMAIL;
   const result: SendRegistrationEmailsResult = {
     registrantEmailSent: false,
     ownerEmailSent: false,
     errors: [],
   };
 
-  if (!ZEPTO_FROM_EMAIL) {
-    const error = "ZeptoMail from email not configured";
+  if (!client) {
+    const error = "Inbound API key not configured";
     console.error(`[EMAIL] ${error}`);
     result.errors.push(error);
     return result;
@@ -375,23 +348,12 @@ export async function sendRegistrationEmails(
     status: "pending",
   });
 
-  const registrantPayload: EmailPayload = {
-    from: { address: ZEPTO_FROM_EMAIL },
-    to: [{ email_address: { address: rsvp.email } }],
-    subject: registrantSubject,
-    htmlbody: generateConfirmationEmailHtml(rsvp, event, false),
-  };
-
-  const ownerPayload: EmailPayload = {
-    from: { address: ZEPTO_FROM_EMAIL },
-    to: [{ email_address: { address: OWNER_EMAIL } }],
-    subject: ownerSubject,
-    htmlbody: generateConfirmationEmailHtml(rsvp, event, true),
-  };
+  const registrantHtml = generateConfirmationEmailHtml(rsvp, event, false);
+  const ownerHtml = generateConfirmationEmailHtml(rsvp, event, true);
 
   const [registrantResult, ownerResult] = await Promise.all([
-    sendEmailWithRetry(registrantPayload, registrantEmailLog.id),
-    sendEmailWithRetry(ownerPayload, ownerEmailLog.id),
+    sendEmailWithRetry(rsvp.email, registrantSubject, registrantHtml, registrantEmailLog.id),
+    sendEmailWithRetry(OWNER_EMAIL, ownerSubject, ownerHtml, ownerEmailLog.id),
   ]);
 
   result.registrantEmailSent = registrantResult.success;

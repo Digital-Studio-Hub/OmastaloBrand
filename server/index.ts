@@ -71,10 +71,23 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
+  const disableReusePort = process.env.DISABLE_REUSE_PORT === 'true';
+  
+  server.on('error', (err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+      log(`ERROR: Port ${port} is already in use`, 'express');
+    } else if (err.code === 'EACCES') {
+      log(`ERROR: Permission denied to bind to port ${port}`, 'express');
+    } else {
+      log(`ERROR: ${err.message}`, 'express');
+    }
+    process.exit(1);
+  });
+  
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
+    reusePort: !disableReusePort,
   }, () => {
     log(`serving on port ${port}`);
   });
