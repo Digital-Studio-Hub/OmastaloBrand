@@ -42,9 +42,9 @@ RUN npm ci --omit=dev
 COPY --from=builder /build/dist ./dist
 COPY --from=builder /build/dist/public ./dist/public
 
-# Create a non-root user for security
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
+# Use the built-in node user for security (already exists in node:20-slim)
+RUN chown -R node:node /app
+USER node
 
 # Set production environment variables
 ENV NODE_ENV=production
