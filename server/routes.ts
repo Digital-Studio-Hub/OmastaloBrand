@@ -1,3 +1,4 @@
+import { submitContactToLekker } from './lekker-connect';
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import passport from "passport";
@@ -550,3 +551,5 @@ Sitemap: https://www.omastalo.co.za/api/sitemap.xml
 
   return httpServer;
 }
+
+
